@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.module.customer.dao.impl.HealthStatusDao">
+
+    <resultMap type="com.framework.module.customer.domain.HealthStatus" id="BaseResultMap">
+        <id column="health_status_id" property="healthStatusId"/>
+        <result column="customer_id" property="customerId"/>
+        <result column="status_des" property="statusDes"/>
+        <result column="status_type" property="type"/>
+        <result column="createTime" property="createTime"/>
+        <result column="lastModifiedTime" property="lastModifiedTime"/>
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="tableNameSql">
+        prd_health_status
+    </sql>
+    <!-- 用于select查询、insert的公用抽取的列 -->
+    <sql id="commonSelectColumnsPrefix">
+        health_status_id,
+        customer_id,
+        status_des,
+        status_type,
+        createTime,
+        lastModifiedTime
+    </sql>
+
+    <insert id="save" parameterType="com.framework.module.customer.domain.HealthStatus">
+        insert into <include refid="tableNameSql"/>(customer_id,status_des,status_type,createTime,lastModifiedTime)
+        values (#{customerId},#{statusDes},#{type},#{createTime},#{lastModifiedTime})
+    </insert>
+
+    <sql id="mainSql">
+        SELECT
+        <include refid="commonSelectColumnsPrefix"/>
+        FROM
+        <include refid="tableNameSql"/>
+        t
+    </sql>
+
+    <select id="findAll" parameterType="String" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+    </select>
+
+    <!-- 按主键查找条件语句 -->
+    <sql id="conditionOnlyId">
+        health_status_id = #{healthStatusId}
+    </sql>
+
+    <select id="findById" parameterType="Integer" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+        where <include refid="conditionOnlyId"/>
+    </select>
+
+    <update id="update" parameterType="com.framework.module.customer.domain.HealthStatus">
+        update
+        <include refid="tableNameSql"/>
+        <set>
+            <if test="title!=null and title!=''">realName=#{realName}</if>
+        </set>
+        where <include refid="conditionOnlyId"/>
+    </update>
+
+    <select id="findListBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+        <include refid="varSql"/>
+        <if test="SORT != null and SORT != ''">
+            order by ${SORT}
+            <if test="DIR != null and DIR != ''">
+                ${DIR}
+            </if>
+        </if>
+    </select>
+
+    <sql id="varSql">
+        <where >
+            <trim suffixOverrides="and">
+                <if test="creator!=null and creator!=''">and t.name=#{name} </if>
+            </trim>
+        </where>
+    </sql>
+
+    <select id="findByCustomerId" parameterType="Integer" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+        where customer_id=#{customerId}
+    </select>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.module.customer.dao.impl.ReliefAgenciesDao">
+
+    <resultMap type="com.framework.module.customer.domain.ReliefAgencies" id="BaseResultMap">
+        <id column="reliefAgenciesId" property="reliefAgenciesId"/>
+        <result column="customerId" property="customerId"/>
+        <result column="name" property="name"/>
+        <result column="contact" property="contact"/>
+        <result column="phone" property="phone"/>
+        <result column="address" property="address"/>
+        <result column="type" property="type"/>
+        <result column="createTime" property="createTime"/>
+        <result column="lastModifiedTime" property="lastModifiedTime"/>
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="tableNameSql">
+        prd_relief_agencies
+    </sql>
+    <!-- 用于select查询、insert的公用抽取的列 -->
+    <sql id="commonSelectColumnsPrefix">
+        reliefAgenciesId,
+        customerId,
+        name,
+        contact,
+        phone,
+        address,
+        type,
+        createTime,
+        lastModifiedTime
+    </sql>
+
+    <insert id="save" parameterType="com.framework.module.customer.domain.ReliefAgencies">
+        insert into <include refid="tableNameSql"/>(customerId,name,contact,phone,address,type,createTime,lastModifiedTime)
+        values (#{customerId},#{name},#{contact},#{phone},#{address},#{type},#{createTime},#{lastModifiedTime})
+    </insert>
+
+    <sql id="mainSql">
+        SELECT
+        <include refid="commonSelectColumnsPrefix"/>
+        FROM
+        <include refid="tableNameSql"/>
+        t
+    </sql>
+
+    <select id="findAll" parameterType="String" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+    </select>
+
+    <!-- 按主键查找条件语句 -->
+    <sql id="conditionOnlyId">
+        reliefAgenciesId = #{reliefAgenciesId}
+    </sql>
+
+    <select id="findById" parameterType="Integer" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+        where <include refid="conditionOnlyId"/>
+    </select>
+
+    <update id="update" parameterType="com.framework.module.customer.domain.ReliefAgencies">
+        update
+        <include refid="tableNameSql"/>
+        <set>
+            <if test="title!=null and title!=''">realName=#{realName}</if>
+        </set>
+        where <include refid="conditionOnlyId"/>
+    </update>
+
+    <select id="findListBy" parameterType="java.util.Map" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+        <include refid="varSql"/>
+        <if test="SORT != null and SORT != ''">
+            order by ${SORT}
+            <if test="DIR != null and DIR != ''">
+                ${DIR}
+            </if>
+        </if>
+    </select>
+
+    <sql id="varSql">
+        <where >
+            <trim suffixOverrides="and">
+                <if test="creator!=null and creator!=''">and t.name=#{name} </if>
+            </trim>
+        </where>
+    </sql>
+
+    <select id="findByCustomerId" parameterType="Integer" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+        where customerId=#{customerId} ORDER BY TYPE
+    </select>
+</mapper>

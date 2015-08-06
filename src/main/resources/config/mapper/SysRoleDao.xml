@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.module.security.dao.impl.SysRoleDao">
+    <resultMap type="com.framework.module.security.domain.SysRole" id="BaseResultMap">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_value" property="roleValue"/>
+    </resultMap>
+    <!-- 表名 -->
+    <sql id="tableNameSql">
+        sys_role
+    </sql>
+    <!-- 用于select查询、insert的公用抽取的列 -->
+    <sql id="commonSelectColumnsPrefix">
+        role_id,
+        role_name,
+        role_value
+    </sql>
+
+    <sql id="mainSql">
+        SELECT
+        <include refid="commonSelectColumnsPrefix"/>
+        FROM
+        <include refid="tableNameSql"/>
+        t
+    </sql>
+
+    <select id="findAll" parameterType="String" resultMap="BaseResultMap">
+        <include refid="mainSql"/>
+    </select>
+
+    <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <include refid="mainSql"/> where t.role_id=#{id}
+    </select>
+
+    <select id="finRoleByResourceId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT t1.* FROM `sys_role` t1 LEFT JOIN `sys_role_resource` t2 ON t1.`role_id` = t2.`role_id` WHERE t2.`resource_id`=#{parameter}
+    </select>
+
+    <select id="findSysUserRole" parameterType="object" resultMap="BaseResultMap">
+        SELECT t1.* FROM `sys_role` t1 LEFT JOIN `sys_role_dispatcher` t2 ON t1.`role_id`= t2.`role_id` WHERE t2.`obj_id`=#{parameter} AND t2.`obj_type`=1
+    </select>
+
+    <insert id="addRoleDispatcherByObjId" parameterType="java.lang.Integer">
+        insert into sys_role_dispatcher (role_id,obj_id,obj_type) values (2,#{parameter},1)
+    </insert>
+
+    <delete id="deleteRoleDispatcherByObjId" parameterType="java.lang.Integer">
+        DELETE FROM sys_role_dispatcher WHERE obj_id=#{parameter} AND obj_type=1
+    </delete>
+
+</mapper>

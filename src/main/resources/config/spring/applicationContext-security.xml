@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.0.xsd ">
+
+    <!--<debug/>-->
+    <!-- 无需进行权限验证的路径 -->
+    <http pattern="/admin/js/**" security="none"/>
+    <http pattern="/admin/login" security="none"/>
+
+
+    <!-- auto-config 自动配置常用的权限控制机制 -->
+    <!-- servlet-api-provision 禁止保存登录之前的请求 -->
+    <!-- access-denied-page 访问未授权时的显示页面 -->
+    <http auto-config="true" access-decision-manager-ref="accessDecisionManager" create-session="never">
+        <csrf disabled="true"/>
+        <anonymous enabled="false" />
+        <!-- login-page 登录页面 -->
+        <!-- default-target-url 登录成功后跳转的URL -->
+        <!-- always-use-default-target 是否登录后必须访问default-target-url -->
+        <!-- authentication-failure-url 登录失败后跳转的URL -->
+        <form-login login-page="/admin/login" login-processing-url="/admin/check" default-target-url="/admin/main" authentication-failure-url="/admin/login" always-use-default-target="true"/>
+        <http-basic/>
+        <custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor"/>
+        <logout invalidate-session="true" logout-success-url="/admin/login" logout-url="/admin/logout"/>
+        <access-denied-handler error-page="/html/http403.html"/>
+        <session-management invalid-session-url="/admin/login?invalid-session=true" session-authentication-error-url="/admin/login" />
+        <headers>
+            <frame-options  policy="SAMEORIGIN" />
+        </headers>
+
+    </http>
+
+    <beans:bean id="successHandler"
+                class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <beans:property name="defaultTargetUrl" value="/admin/main"/>
+        <beans:property name="alwaysUseDefaultTargetUrl" value="true"/>
+    </beans:bean>
+
+    <beans:bean id="failureHandler"
+                class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="/admin/login"/>
+    </beans:bean>
+
+    <!-- 定义权限、资源关系 -->
+    <beans:bean id="filterSecurityInterceptor"
+                class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+        <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+        <beans:property name="accessDecisionManager" ref="accessDecisionManager"/>
+        <!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
+        <beans:property name="securityMetadataSource" ref="secureResourceFilterInvocationDefinitionSource"/>
+    </beans:bean>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="sysUserDetailService">
+            <password-encoder hash="md5"/>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="accessDecisionManager" class="com.framework.module.security.service.impl.AuthorityAccessDecisionManager">
+    </beans:bean>
+
+    <!--<beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl"/>
+
+    <beans:bean id="sas" class="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy">
+        <beans:constructor-arg>
+            <beans:list>
+                <beans:bean class="org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy">
+                    <beans:constructor-arg ref="sessionRegistry"/>
+                    <beans:property name="maximumSessions" value="1" />
+                    <beans:property name="exceptionIfMaximumExceeded" value="true" />
+                </beans:bean>
+                <beans:bean class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy">
+                </beans:bean>
+                <beans:bean class="org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy">
+                    <beans:constructor-arg ref="sessionRegistry"/>
+                </beans:bean>
+            </beans:list>
+        </beans:constructor-arg>
+    </beans:bean>-->
+
+
+
+</beans:beans>

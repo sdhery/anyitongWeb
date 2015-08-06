@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.common.dao.impl.SysTreeDao">
+    <resultMap type="com.framework.common.domain.SysTree" id="BaseResultMap">
+        <id column="tree_id" property="treeId"/>
+        <result column="tree_name" property="treeName"/>
+        <result column="tree_parent_id" property="treeParentId"/>
+        <result column="url" property="url"/>
+    </resultMap>
+
+    <!-- 表名 -->
+    <sql id="tableNameSql">
+        sys_tree
+    </sql>
+    <!-- 用于select查询、insert的公用抽取的列 -->
+    <sql id="commonSelectColumnsPrefix">
+        tree_id,
+        tree_name,
+        tree_parent_id,
+        url
+    </sql>
+
+    <sql id="mainSql">
+        SELECT
+        <include refid="commonSelectColumnsPrefix"/>
+        FROM
+        <include refid="tableNameSql"/>
+        t
+    </sql>
+
+    <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <include refid="mainSql"/> where t.tree_id=#{id}
+    </select>
+
+    <select id="findByPrentId" parameterType="object" resultMap="BaseResultMap">
+        SELECT * FROM `sys_tree` t WHERE t.`tree_parent_id`=#{parameter}
+    </select>
+</mapper>

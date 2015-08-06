@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.module.user.dao.impl.SysUserDao">
+
+    <resultMap type="com.framework.module.user.domain.SysUser" id="BaseSysUserResultMap">
+        <id column="SYS_USER_ID" property="sysUserId"/>
+        <result column="LOGIN_ID" property="loginId"/>
+        <result column="realName" property="realName"/>
+        <result column="password" property="password"/>
+        <result column="IS_ADMIN" property="isAdmin"/>
+        <result column="jobNumber" property="jobNumber"/>
+        <result column="createTime" property="createTime"/>
+        <result column="lastModifiedTime" property="lastModifiedTime"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime"/>
+    </resultMap>
+
+    <insert id="save" parameterType="com.framework.module.user.domain.SysUser" keyProperty="sysUserId" useGeneratedKeys="true">
+        insert into <include refid="tableNameSql"/>
+        (login_id,password,realName,createTime,lastModifiedTime,IS_ADMIN,LAST_LOGIN_TIME,jobNumber)
+        values (#{loginId},#{password},#{realName},#{createTime},#{lastModifiedTime},#{isAdmin},#{lastLoginTime},#{jobNumber})
+    </insert>
+
+    <!-- 表名 -->
+    <sql id="tableNameSql">
+        sys_user
+    </sql>
+    <!-- 用于select查询、insert的公用抽取的列 -->
+    <sql id="commonSelectColumnsPrefix">
+        SYS_USER_ID,
+        realName,
+        login_id,
+        password,
+        createTime,
+        lastModifiedTime,
+        LAST_LOGIN_TIME,
+        jobNumber,
+        IS_ADMIN
+    </sql>
+
+    <!-- 按主键查找条件语句 -->
+    <sql id="conditionOnlyId">
+        SYS_USER_ID = #{sysUserId}
+    </sql>
+
+    <sql id="mainSql">
+        SELECT
+        <include refid="commonSelectColumnsPrefix"/>
+        FROM
+        <include refid="tableNameSql"/>
+        t
+    </sql>
+
+    <sql id="varSql">
+        <where>
+            <trim suffixOverrides="and">
+                <!--
+                   mybatis 中模糊查询 like #{name}  这种写法最后查询出来的数据是按照等值查的
+                              模糊查询一共有三种方式：
+                          like "%"#{name}"%"  推荐这种写法
+                          like '%'||#{name}||'%'
+                          like '%${name}%'
+                          # 占位符，有防sql注入的功能   name=#{name}解析出来是 name=?
+                          $ 代表解析动态变量     name=${name}  解析出来时name='yxkong'
+                 -->
+                <if test="loginId!=null and loginId!=''">and t.login_id like "%"#{loginId}"%"</if>
+                <if test="isAdmin!=null">and t.IS_ADMIN =#{isAdmin}</if>
+                <if test="realName!=null and realName!=''">and t.realName = #{realName}</if>
+                <if test="jobNumber!=null and jobNumber!=''">and t.jobNumber = #{jobNumber}</if>
+            </trim>
+        </where>
+    </sql>
+
+    <select id="findListBy" parameterType="java.util.Map" resultMap="BaseSysUserResultMap">
+        <include refid="mainSql"/>
+        <include refid="varSql"/>
+        <if test="SORT != null and SORT != ''">
+            order by ${SORT}
+            <if test="DIR != null and DIR != ''">
+                ${DIR}
+            </if>
+        </if>
+    </select>
+
+    <select id="findById" parameterType="String" resultMap="BaseSysUserResultMap">
+        <include refid="mainSql"/>
+        where
+        <include refid="conditionOnlyId"/>
+    </select>
+
+    <select id="findByLoginId" parameterType="java.lang.String" resultMap="BaseSysUserResultMap">
+        <include refid="mainSql"/>
+        WHERE t.LOGIN_ID=#{loginId}
+    </select>
+
+    <select id="findByAdminLoginId" parameterType="java.lang.String" resultMap="BaseSysUserResultMap">
+        <include refid="mainSql"/>
+        WHERE t.LOGIN_ID=#{loginId} AND t.IS_ADMIN=1
+    </select>
+
+    <select id="findByMemberLoginId" parameterType="java.lang.String" resultMap="BaseSysUserResultMap">
+        <include refid="mainSql"/>
+        WHERE t.LOGIN_ID=#{loginId} AND t.IS_ADMIN=0
+    </select>
+
+    <update id="updatePassword" parameterType="com.framework.module.user.domain.SysUser">
+        update
+        <include refid="tableNameSql"/>
+        set password=#{password} ,lastModifiedTime=#{lastModifiedTime} where SYS_USER_ID = #{sysUserId}
+    </update>
+
+    <update id="updateLastLoginTime" parameterType="com.framework.module.user.domain.SysUser">
+        update
+        <include refid="tableNameSql"/>
+        set LAST_LOGIN_TIME=#{lastLoginTime} where SYS_USER_ID = #{sysUserId}
+    </update>
+
+    <update id="update" parameterType="com.framework.module.user.domain.SysUser">
+        update
+        <include refid="tableNameSql"/>
+        <set>
+            <if test="realName!=null and realName!=''">realName=#{realName} ,</if>
+            <if test="jobNumber!=null and jobNumber!=''">realName=#{realName} ,</if>
+            <if test="lastModifiedTime!=null and lastModifiedTime!=''">lastModifiedTime=#{lastModifiedTime}</if>
+        </set>
+        where <include refid="conditionOnlyId"/>
+    </update>
+</mapper>
