@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>录入员登录</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<script src="js/mui.min.js"></script>
+    <script src="js/tool.js"></script>
+    <script>
+        mui.plusReady(function(){
+            //plus.nativeUI.showWaiting();
+            var flag=UserInfo.auto_login();
+            var url="login.html"
+            if(flag){
+                url="setting.html"
+            }
+            mui.init({
+                subpages:[{
+                    url:url,
+                    id:'index.html'
+                }]
+            });
+            /*var mainPage = mui.preload({
+                "id": 'main',
+                "url": url
+            });
+            var toMain = function() {
+                mui.fire(mainPage, 'show', null);
+                setTimeout(function() {
+                    mui.openWindow({
+                        id: 'main',
+                        show: {
+                            aniShow: 'pop-in'
+                        },
+                        waiting: {
+                            autoShow: false
+                        }
+                    });
+                }, 0);
+            };
+            toMain()*/
+        });
+
+    </script>
+</head>
+</html>

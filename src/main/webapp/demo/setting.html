@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<title>设置</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script src="js/mui.min.js"></script>
+    <script src="js/mui.view.js"></script>
+    <script src="js/zepto.js"></script>
+    <script src="js/tool.js"></script>
+    <script>
+        mui.plusReady(function () {
+            plus.nativeUI.closeWaiting();
+            $("#userName").html(UserInfo.username())
+            $("#realName").html(UserInfo.realName())
+            $("#sysUserId").html(UserInfo.sysUserId())
+            plus.geolocation.getCurrentPosition(geoInf, function (e) {
+                alert("获取百度定位位置信息失败：" + e.message);
+            }, {provider: 'baidu'});
+        });
+        function geoInf(position) {
+            var codns = position.coords;//获取地理坐标信息；
+            $("#mapLongitude").val(codns.longitude)
+            $("#mapLatitude").val(codns.latitude)
+        }
+    </script>
+    <style>
+        html,
+        body {
+            background-color: #efeff4;
+        }
+
+        .mui-views,
+        .mui-view,
+        .mui-pages,
+        .mui-page,
+        .mui-page-content {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #efeff4;
+        }
+
+        .mui-pages {
+            top: 46px;
+            height: auto;
+        }
+
+        .mui-scroll-wrapper,
+        .mui-scroll {
+            background-color: #efeff4;
+        }
+
+        .mui-page.mui-transitioning {
+            -webkit-transition: -webkit-transform 300ms ease;
+            transition: transform 300ms ease;
+        }
+
+        .mui-page-left {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .mui-ios .mui-page-left {
+            -webkit-transform: translate3d(-20%, 0, 0);
+            transform: translate3d(-20%, 0, 0);
+        }
+
+        .mui-navbar {
+            position: fixed;
+            right: 0;
+            left: 0;
+            z-index: 10;
+            height: 44px;
+            background-color: #f7f7f8;
+        }
+
+        .mui-navbar .mui-bar {
+            position: absolute;
+            background: transparent;
+            text-align: center;
+        }
+
+        .mui-android .mui-navbar-inner.mui-navbar-left {
+            opacity: 0;
+        }
+
+        .mui-ios .mui-navbar-left .mui-left,
+        .mui-ios .mui-navbar-left .mui-center,
+        .mui-ios .mui-navbar-left .mui-right {
+            opacity: 0;
+        }
+
+        .mui-navbar .mui-btn-nav {
+            -webkit-transition: none;
+            transition: none;
+            -webkit-transition-duration: .0s;
+            transition-duration: .0s;
+        }
+
+        .mui-navbar .mui-bar .mui-title {
+            display: inline-block;
+            position: static;
+            width: auto;
+        }
+
+        .mui-page-shadow {
+            position: absolute;
+            right: 100%;
+            top: 0;
+            width: 16px;
+            height: 100%;
+            z-index: -1;
+            content: '';
+        }
+
+        .mui-page-shadow {
+            background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+        }
+
+        .mui-navbar-inner.mui-transitioning,
+        .mui-navbar-inner .mui-transitioning {
+            -webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
+            transition: opacity 300ms ease, transform 300ms ease;
+        }
+
+        .mui-page {
+            display: none;
+        }
+
+        .mui-pages .mui-page {
+            display: block;
+        }
+
+        .mui-page .mui-table-view:first-child {
+            margin-top: 15px;
+        }
+
+        .mui-page .mui-table-view:last-child {
+            margin-bottom: 30px;
+        }
+
+        .mui-table-view {
+            margin-top: 20px;
+        }
+
+        .mui-table-view:after {
+            height: 0;
+        }
+
+        .mui-table-view span.mui-pull-right {
+            color: #999;
+        }
+
+        .mui-table-view-divider {
+            background-color: #efeff4;
+            font-size: 14px;
+        }
+
+        .mui-table-view-divider:before,
+        .mui-table-view-divider:after {
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" class="mui-views">
+    <div class="mui-view">
+        <div class="mui-navbar">
+        </div>
+        <div class="mui-pages">
+        </div>
+    </div>
+</div>
+
+<div id="setting" class="mui-page">
+    <div class="mui-navbar-inner mui-bar">
+        <h1 class="mui-center mui-title">安颐通</h1>
+    </div>
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view mui-table-view-chevron">
+                    <li class="mui-table-view-cell">
+                        <a href="#reg1" class="mui-navigate-right">录入资料</a>
+                    </li>
+                </ul>
+                <ul class="mui-table-view mui-table-view-chevron">
+                    <li class="mui-table-view-cell">
+                        <a href="#account" class="mui-navigate-right">账号与安全</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reg1" class="mui-page">
+    <!--页面标题栏开始-->
+    <div class="mui-navbar-inner mui-bar">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+            <span class="mui-icon mui-icon-left-nav"></span>我
+        </button>
+        <h1 class="mui-center mui-title">安颐通呼援服务登录表</h1>
+    </div>
+    <!--页面标题栏结束-->
+    <!--页面主内容区开始-->
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+
+                <form class="mui-input-group" name="customerVoForm">
+                    <input type="hidden" name="customer.mapLongitude" id="mapLongitude"/>
+                    <input type="hidden" name="customer.mapLatitude" id="mapLatitude"/>
+
+                    <div class="mui-input-row">
+                        <label>姓名</label>
+                        <input type="text" placeholder="姓名" name="customer.realName"/>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>性别</label>
+                        <select name="customer.sex">
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>住所地址</label>
+                        <input type="text" placeholder="住所地址" name="customer.address"/>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>交通道路</label>
+                        <input type="text" placeholder="交通道路" name="customer.roadTraffic"/>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>固定电话</label>
+                        <input type="text" placeholder="固定电话" name="customer.phone"/>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>移动电话</label>
+                        <input type="text" placeholder="移动电话" name="customer.mobilePhone"/>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>身份证号码</label>
+                        <input type="text" placeholder="身份证号码" name="customer.idCard"/>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>居家状况</label>
+                        <select name="customer.homeSituation">
+                            <option value="0">孤寡</option>
+                            <option value="1">独居</option>
+                            <option value="2">双老</option>
+                            <option value="3">子女同住</option>
+                            <option value="4">其他</option>
+                        </select>
+                    </div>
+                    <div class="mui-input-row">
+                        <label>购买类型</label>
+                        <select name="customer.purchaseType">
+                            <option value="0">普通</option>
+                            <option value="1">全额资助</option>
+                            <option value="2">半额资助</option>
+                            <option value="3">慈善捐助</option>
+                            <option value="4">其他</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="mui-content-padded">
+                    <a href="#reg2">
+                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--页面主内容区结束-->
+</div>
+
+<div id="reg2" class="mui-page">
+    <!--页面标题栏开始-->
+    <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+            <span class="mui-icon mui-icon-left-nav"></span>
+        </button>
+        <h1 class="mui-center mui-title">联系人</h1>
+    </div>
+    <!--页面标题栏结束-->
+    <!--页面主内容区开始-->
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell mui-collapse mui-active">
+                        <a class="mui-navigate-right" href="#">联络人1</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <div class="mui-input-row">
+                                    <label>姓名</label>
+                                    <input type="text" placeholder="姓名" name="contactsList[0].realName"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>性别</label>
+                                    <select name="contactsList[0].sex">
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>关系</label>
+                                    <input type="text" placeholder="关系" name="contactsList[0].bind"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>固定电话</label>
+                                    <input type="text" placeholder="固定电话" name="contactsList[0].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>移动电话</label>
+                                    <input type="text" placeholder="移动电话" name="contactsList[0].mobilePhone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>住址/说明</label>
+                                    <input type="text" placeholder="住址/说明" name="contactsList[0].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">联络人2</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <div class="mui-input-row">
+                                    <label>姓名</label>
+                                    <input type="text" placeholder="姓名" name="contactsList[1].realName"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>性别</label>
+                                    <select name="contactsList[1].sex">
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>关系</label>
+                                    <input type="text" placeholder="关系" name="contactsList[1].bind"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>固定电话</label>
+                                    <input type="text" placeholder="固定电话" name="contactsList[1].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>移动电话</label>
+                                    <input type="text" placeholder="移动电话" name="contactsList[1].mobilePhone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>住址/说明</label>
+                                    <input type="text" placeholder="住址/说明" name="contactsList[1].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">联络人3</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <div class="mui-input-row">
+                                    <label>姓名</label>
+                                    <input type="text" placeholder="姓名" name="contactsList[2].realName"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>性别</label>
+                                    <select name="contactsList[2].sex">
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>关系</label>
+                                    <input type="text" placeholder="关系" name="contactsList[2].bind"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>固定电话</label>
+                                    <input type="text" placeholder="固定电话" name="contactsList[2].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>移动电话</label>
+                                    <input type="text" placeholder="移动电话" name="contactsList[2].mobilePhone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>住址/说明</label>
+                                    <input type="text" placeholder="住址/说明" name="contactsList[2].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">联络人4</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <div class="mui-input-row">
+                                    <label>姓名</label>
+                                    <input type="text" placeholder="姓名" name="contactsList[3].realName"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>性别</label>
+                                    <select name="contactsList[3].sex">
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>关系</label>
+                                    <input type="text" placeholder="关系" name="contactsList[3].bind"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>固定电话</label>
+                                    <input type="text" placeholder="固定电话" name="contactsList[3].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>移动电话</label>
+                                    <input type="text" placeholder="移动电话" name="contactsList[3].mobilePhone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>住址/说明</label>
+                                    <input type="text" placeholder="住址/说明" name="contactsList[3].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">联络人5</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <div class="mui-input-row">
+                                    <label>姓名</label>
+                                    <input type="text" placeholder="姓名" name="contactsList[4].realName"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>性别</label>
+                                    <select name="contactsList[4].sex">
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>关系</label>
+                                    <input type="text" placeholder="关系" name="contactsList[4].bind"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>固定电话</label>
+                                    <input type="text" placeholder="固定电话" name="contactsList[4].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>移动电话</label>
+                                    <input type="text" placeholder="移动电话" name="contactsList[4].mobilePhone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>住址/说明</label>
+                                    <input type="text" placeholder="住址/说明" name="contactsList[4].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                </ul>
+                <div class="mui-content-padded">
+                    <a href="#reg3">
+                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--页面主内容区结束-->
+</div>
+
+<div id="reg3" class="mui-page">
+    <!--页面标题栏开始-->
+    <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+            <span class="mui-icon mui-icon-left-nav"></span>
+        </button>
+        <h1 class="mui-center mui-title">救助机购</h1>
+    </div>
+    <!--页面标题栏结束-->
+    <!--页面主内容区开始-->
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell mui-collapse mui-active">
+                        <a class="mui-navigate-right" href="#">急救中心</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="reliefAgenciesList[0].type" value="5"/>
+
+                                <div class="mui-input-row">
+                                    <label>名称</label>
+                                    <input type="text" placeholder="名称" name="reliefAgenciesList[0].name"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系人/部门</label>
+                                    <input type="text" placeholder="联系人/部门" name="reliefAgenciesList[0].contact"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系电话</label>
+                                    <input type="text" placeholder="联系电话" name="reliefAgenciesList[0].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>地址</label>
+                                    <input type="text" placeholder="地址" name="reliefAgenciesList[0].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">街道/镇</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="reliefAgenciesList[1].type" value="0"/>
+
+                                <div class="mui-input-row">
+                                    <label>名称</label>
+                                    <input type="text" placeholder="名称" name="reliefAgenciesList[1].name"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系人/部门</label>
+                                    <input type="text" placeholder="联系人/部门" name="reliefAgenciesList[1].contact"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系电话</label>
+                                    <input type="text" placeholder="联系电话" name="reliefAgenciesList[1].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>地址</label>
+                                    <input type="text" placeholder="地址" name="reliefAgenciesList[1].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">派出所</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="reliefAgenciesList[2].type" value="1"/>
+
+                                <div class="mui-input-row">
+                                    <label>名称</label>
+                                    <input type="text" placeholder="名称" name="reliefAgenciesList[2].name"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系人/部门</label>
+                                    <input type="text" placeholder="联系人/部门" name="reliefAgenciesList[2].contact"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系电话</label>
+                                    <input type="text" placeholder="联系电话" name="reliefAgenciesList[2].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>地址</label>
+                                    <input type="text" placeholder="地址" name="reliefAgenciesList[2].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">村/居委</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="reliefAgenciesList[3].type" value="2"/>
+
+                                <div class="mui-input-row">
+                                    <label>名称</label>
+                                    <input type="text" placeholder="名称" name="reliefAgenciesList[3].name"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系人/部门</label>
+                                    <input type="text" placeholder="联系人/部门" name="reliefAgenciesList[3].contact"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系电话</label>
+                                    <input type="text" placeholder="联系电话" name="reliefAgenciesList[3].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>地址</label>
+                                    <input type="text" placeholder="地址" name="reliefAgenciesList[3].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">服务中心</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="reliefAgenciesList[4].type" value="3"/>
+
+                                <div class="mui-input-row">
+                                    <label>名称</label>
+                                    <input type="text" placeholder="名称" name="reliefAgenciesList[4].name"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系人/部门</label>
+                                    <input type="text" placeholder="联系人/部门" name="reliefAgenciesList[4].contact"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系电话</label>
+                                    <input type="text" placeholder="联系电话" name="reliefAgenciesList[4].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>地址</label>
+                                    <input type="text" placeholder="地址" name="reliefAgenciesList[4].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">医 院</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="reliefAgenciesList[5].type" value="4"/>
+
+                                <div class="mui-input-row">
+                                    <label>名称</label>
+                                    <input type="text" placeholder="名称" name="reliefAgenciesList[5].name"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系人/部门</label>
+                                    <input type="text" placeholder="联系人/部门" name="reliefAgenciesList[5].contact"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>联系电话</label>
+                                    <input type="text" placeholder="联系电话" name="reliefAgenciesList[5].phone"/>
+                                </div>
+                                <div class="mui-input-row">
+                                    <label>地址</label>
+                                    <input type="text" placeholder="地址" name="reliefAgenciesList[5].address"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <div class="mui-content-padded">
+                    <a href="#reg4">
+                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--页面主内容区结束-->
+</div>
+
+<div id="reg4" class="mui-page">
+    <!--页面标题栏开始-->
+    <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+            <span class="mui-icon mui-icon-left-nav"></span>
+        </button>
+        <h1 class="mui-center mui-title">健康状况</h1>
+    </div>
+    <!--页面标题栏结束-->
+    <!--页面主内容区开始-->
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+
+                    <li class="mui-table-view-cell mui-collapse mui-active">
+                        <a class="mui-navigate-right" href="#">健康状况</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[0].type" value="0"/>
+                                <select name="healthStatusList[0].statusDes">
+                                    <option value="行动良好">行动良好</option>
+                                    <option value="尚可自理">尚可自理</option>
+                                    <option value="不能自理">不能自理</option>
+                                </select>
+                            </form>
+                        </div>
+                    </li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">血型</a>
+						<div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[1].type" value="1"/>
+								<select name="healthStatusList[1].statusDes">
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="AB">AB</option>
+									<option value="O">O</option>
+                                </select>
+							</form>
+						</div>
+					</li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">现有疾病</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[2].type" value="2"/>
+                                <div class="mui-input-row">
+                                    <label>现有疾病1</label>
+                                    <input type="text" placeholder="现有疾病1" name="healthStatusList[2].statusDesList[0]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>现有疾病2</label>
+                                    <input type="text" placeholder="现有疾病2" name="healthStatusList[2].statusDesList[1]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>现有疾病3</label>
+                                    <input type="text" placeholder="现有疾病3" name="healthStatusList[2].statusDesList[2]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>现有疾病4</label>
+                                    <input type="text" placeholder="现有疾病4" name="healthStatusList[2].statusDesList[3]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>现有疾病5</label>
+                                    <input type="text" placeholder="现有疾病5" name="healthStatusList[2].statusDesList[4]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>现有疾病6</label>
+                                    <input type="text" placeholder="现有疾病6" name="healthStatusList[2].statusDesList[5]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>现有疾病7</label>
+                                    <input type="text" placeholder="现有疾病7" name="healthStatusList[2].statusDesList[6]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>现有疾病8</label>
+                                    <input type="text" placeholder="现有疾病8" name="healthStatusList[1].statusDesList[7]"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">个人病史</a>
+						<div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[3].type" value="3"/>
+								<div class="mui-input-row">
+                                    <input type="text" placeholder="个人病史" name="healthStatusList[3].statusDes"/>
+                                </div>
+							</form>
+						</div>
+					</li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">病况摘要</a>
+						<div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[4].type" value="4"/>
+								<div class="mui-input-row">
+                                    <input type="text" placeholder="病况摘要" name="healthStatusList[4].statusDes"/>
+                                </div>
+							</form>
+						</div>
+					</li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">常用药</a>
+						<div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[5].type" value="5"/>
+                                <div class="mui-input-row">
+                                    <label>常用药1</label>
+                                    <input type="text" placeholder="常用药1" name="healthStatusList[5].statusDesList[0]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>常用药2</label>
+                                    <input type="text" placeholder="常用药2" name="healthStatusList[5].statusDesList[1]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>常用药3</label>
+                                    <input type="text" placeholder="常用药3" name="healthStatusList[5].statusDesList[2]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>常用药4</label>
+                                    <input type="text" placeholder="常用药4" name="healthStatusList[5].statusDesList[3]"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">禁忌药</a>
+						<div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[6].type" value="6"/>
+                                <div class="mui-input-row">
+                                    <label>禁忌药1</label>
+                                    <input type="text" placeholder="禁忌药1" name="healthStatusList[6].statusDesList[0]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>禁忌药2</label>
+                                    <input type="text" placeholder="禁忌药2" name="healthStatusList[6].statusDesList[1]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>禁忌药3</label>
+                                    <input type="text" placeholder="禁忌药3" name="healthStatusList[6].statusDesList[2]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>禁忌药4</label>
+                                    <input type="text" placeholder="禁忌药4" name="healthStatusList[6].statusDesList[3]"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">过敏史</a>
+						<div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[7].type" value="7"/>
+                                <div class="mui-input-row">
+                                    <label>过敏史1</label>
+                                    <input type="text" placeholder="过敏史1" name="healthStatusList[7].statusDesList[0]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>过敏史2</label>
+                                    <input type="text" placeholder="过敏史2" name="healthStatusList[7].statusDesList[1]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>过敏史3</label>
+                                    <input type="text" placeholder="过敏史3" name="healthStatusList[7].statusDesList[2]"/>
+                                </div>
+								<div class="mui-input-row">
+                                    <label>过敏史4</label>
+                                    <input type="text" placeholder="过敏史4" name="healthStatusList[7].statusDesList[3]"/>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">挂钩医院</a>
+						<div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[8].type" value="8"/>
+								<div class="mui-input-row">
+                                    <input type="text" placeholder="挂钩医院" name="healthStatusList[8].statusDes"/>
+                                </div>
+							</form>
+						</div>
+					</li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">诊疗卡号/病历编号</a>
+						<div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[9].type" value="9"/>
+								<div class="mui-input-row">
+                                    <input type="text" placeholder="诊疗卡号/病历编号" name="healthStatusList[9].statusDes"/>
+                                </div>
+							</form>
+						</div>
+					</li>
+
+					<li class="mui-table-view-cell mui-collapse">
+                        <a class="mui-navigate-right" href="#">付费方式</a>
+
+                        <div class="mui-collapse-content">
+                            <form class="mui-input-group" name="customerVoForm">
+                                <input type="hidden" name="healthStatusList[10].type" value="10"/>
+                                <select name="healthStatusList[10].statusDes">
+                                    <option value="医保">医保</option>
+                                    <option value="自费">自费</option>
+                                </select>
+                            </form>
+                        </div>
+                    </li>
+
+                </ul>
+				<div class="mui-content-padded">
+					<a href="#reg5">
+						<button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
+					</a>
+				</div>
+            </div>
+        </div>
+    </div>
+    <!--页面主内容区结束-->
+</div>
+
+<div id="reg5" class="mui-page">
+    <!--页面标题栏开始-->
+    <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+            <span class="mui-icon mui-icon-left-nav"></span>
+        </button>
+        <h1 class="mui-center mui-title">业务资料</h1>
+    </div>
+    <!--页面标题栏结束-->
+    <!--页面主内容区开始-->
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <form class="mui-input-group" name="customerVoForm">
+                    <input type="hidden" name="customer.sysUserId" id="sysUserId"/>
+
+                    <div class="mui-input-row">
+                        <label>呼叫器ID</label>
+                        <input type="text" placeholder="呼叫器ID" name="customer.pagerId" id="pagerId"/>
+                    </div>
+                </form>
+                <div class="mui-content-padded">
+                   <a href="#reg6">
+						<button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
+					</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--页面主内容区结束-->
+</div>
+
+<div id="reg6" class="mui-page">
+    <!--页面标题栏开始-->
+    <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+            <span class="mui-icon mui-icon-left-nav"></span>
+        </button>
+        <h1 class="mui-center mui-title">用户登记表预览</h1>
+    </div>
+    <!--页面标题栏结束-->
+    <!--页面主内容区开始-->
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+				
+				<ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <a>姓名</a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a>性别</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>身份证号码</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>住所地址</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>交通道路</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>指示标志</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>固定电话</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>移动电话</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>居家状况</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>联络人1</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>联络人2</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>联络人3</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>联络人4</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>联络人5</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>街道/镇</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>派出所</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>村/居委</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>服务中心</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>医  院</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>急救中心</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>身体状况</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>血型</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>现有病史</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>个人病史</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>病况摘要</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>常用药</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>禁忌药</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>过敏史</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>挂钩医院</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>诊疗卡号/病历编号</a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>付费方式</a>
+                    </li>
+                </ul>
+
+                <div class="mui-content-padded">
+                   <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="customerFormSubmit()">
+                        提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--页面主内容区结束-->
+</div>
+
+<div id="account" class="mui-page">
+    <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+            <span class="mui-icon mui-icon-left-nav"></span>我
+        </button>
+        <h1 class="mui-center mui-title">账号与安全</h1>
+    </div>
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <a>用户名<span class="mui-pull-right" id="userName"></span></a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a>真实姓名<span class="mui-pull-right" id="realName"></span></a>
+                    </li>
+                </ul>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell" style="text-align: center;">
+                        <a href="javascript:loginOut()">退出登录</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function loginOut() {
+        window.location.href = "login.html"
+        UserInfo.clear()
+    }
+    function customerFormSubmit() {
+        try {
+            plus.nativeUI.showWaiting();
+        } catch (error) {
+        }
+        var params = new Array()
+        $.each($("form[name='customerVoForm']"), function (key, value) {
+            params = params.concat($(this).serializeArray())
+        })
+        mui.ajax('http://192.168.1.104/customer/register', {
+            data: params,
+            dataType: 'json',//服务器返回json格式数据
+            type: 'post',//HTTP请求类型
+            timeout: 3000,//超时时间设置为10秒；
+            success: function (data) {
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                try {
+                    plus.nativeUI.closeWaiting();
+                } catch (error) {
+                }
+                if (!data.success) {
+                    mui.toast(data.errMsg);
+                } else {
+                    alert("success")
+                    //UserInfo.username($loginId.val())
+                    //UserInfo.password($password.val())
+                    //window.location.href='setting.html'
+                }
+            },
+            error: function (xhr, type, errorThrown) {
+                try {
+                    plus.nativeUI.closeWaiting();
+                } catch (error) {
+                }
+                if (errorThrown == "Internal Server Error") {
+                    mui.toast('Server Error');
+                } else {
+                    mui.toast('网络不佳');
+                }
+
+            }
+        });
+    }
+    mui.init();
+    //初始化单页view
+    var viewApi = mui('#app').view({
+        defaultPage: '#setting'
+    });
+    var view = viewApi.view;
+    //初始化单页的区域滚动
+    mui('.mui-scroll-wrapper').scroll();
+
+    var view = viewApi.view;
+    (function ($) {
+        //处理view的后退与webview后退
+        var oldBack = $.back;
+        $.back = function () {
+            if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+                viewApi.back();
+            } else { //执行webview后退
+                oldBack();
+            }
+        };
+        //监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+        //第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+        view.addEventListener('pageBeforeShow', function (e) {
+//				console.log(e.detail.page.id + ' beforeShow');
+        });
+        view.addEventListener('pageShow', function (e) {
+//				console.log(e.detail.page.id + ' show');
+        });
+        view.addEventListener('pageBeforeBack', function (e) {
+//				console.log(e.detail.page.id + ' beforeBack');
+        });
+        view.addEventListener('pageBack', function (e) {
+//				console.log(e.detail.page.id + ' back');
+        });
+    })(mui);
+</script>
+</body>
+</html>

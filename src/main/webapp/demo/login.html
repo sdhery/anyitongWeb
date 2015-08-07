@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>录入员登录</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script src="js/mui.min.js"></script>
+    <script src="js/zepto.js"></script>
+    <script src="js/tool.js"></script>
+    <style>
+        .mui-input-group:first-child {
+            margin-top: 20px;
+        }
+        .mui-input-group {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function geoInf( position ) {
+            var str = "";
+            str += "地址："+position.addresses+"\n";//获取地址信息
+            var timeflag = position.timestamp;//获取到地理位置信息的时间戳；一个毫秒数；
+            str += "时间戳："+timeflag+"\n";
+            var codns = position.coords;//获取地理坐标信息；
+            var lat = codns.latitude;//获取到当前位置的纬度；
+            str += "纬度："+lat+"\n";
+            var longt = codns.longitude;//获取到当前位置的经度
+            str += "经度："+longt+"\n";
+            var alt = codns.altitude;//获取到当前位置的海拔信息；
+            str += "海拔："+alt+"\n";
+            var accu = codns.accuracy;//地理坐标信息精确度信息；
+            str += "精确度："+accu+"\n";
+            var altAcc = codns.altitudeAccuracy;//获取海拔信息的精确度；
+            str += "海拔精确度："+altAcc+"\n";
+            var head = codns.heading;//获取设备的移动方向；
+            str += "移动方向："+head+"\n";
+            var sped = codns.speed;//获取设备的移动速度；
+            str += "移动速度："+sped;
+            alert(str)
+        }
+        mui.plusReady(function(){
+        	function getPosBaidu(){
+				alert( "获取百度定位位置信息:" );
+				plus.geolocation.getCurrentPosition( geoInf, function ( e ) {
+                    alert( "获取百度定位位置信息失败："+e.message );
+				},{provider:'baidu'});
+			}
+            plus.nativeUI.closeWaiting();
+            //getPosBaidu()
+        });
+    </script>
+</head>
+<body>
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">录入员登录</h1>
+</header>
+<div class="mui-content">
+    <form class="mui-input-group" id="loginForm" autocomplete="off" method="post">
+        <div class="mui-input-row">
+            <label>账号</label>
+            <input type="text" placeholder="请输入账号" name="loginId" id="loginId"/>
+        </div>
+        <div class="mui-input-row">
+            <label>密码</label>
+            <input type="password" placeholder="请输入密码" name="password" id="password"/>
+        </div>
+    </form>
+    <!--<form class="mui-input-group">
+        <ul class="mui-table-view mui-table-view-chevron">
+            <li class="mui-table-view-cell">
+                自动登录
+                <div id="autoLogin" class="mui-switch">
+                    <div class="mui-switch-handle"></div>
+                </div>
+            </li>
+        </ul>
+    </form>-->
+</div>
+<div class="mui-content-padded">
+    <button class="mui-btn mui-btn-primary mui-btn-block" onclick="loginFormSubmit()">登录</button>
+</div>
+<script>
+    $("#loginForm").submit(function () {
+        var $loginId = $("#loginId");
+        var $password = $("#password");
+        if($.trim($loginId.val())==""){
+            mui.toast("请输入用户名");
+            //$loginId.focus()
+            return false;
+        }
+        if($.trim($password.val())==""){
+            mui.toast("请输入密码");
+            //$password.focus()
+            return false;
+        }
+        try {
+            plus.nativeUI.showWaiting();
+        } catch (error) {
+        }
+        mui.ajax('http://192.168.199.110/customer/login',{
+            data:$(this).serializeArray(),
+            dataType:'json',//服务器返回json格式数据
+            type:'post',//HTTP请求类型
+            timeout:3000,//超时时间设置为10秒；
+            success:function(data){
+                //服务器返回响应，根据响应结果，分析是否登录成功；
+                try {
+                    plus.nativeUI.closeWaiting();
+                } catch (error) {
+                }
+                if (!data.success) {
+                    mui.toast(data.errMsg);
+                }else{
+                    UserInfo.username($loginId.val())
+                    UserInfo.password($password.val())
+                    UserInfo.realName(data.realName)
+                    UserInfo.sysUserId(data.sysUserId)
+                    window.location.href='setting.html'
+                }
+            },
+            error:function(xhr,type,errorThrown){
+                try {
+                    plus.nativeUI.closeWaiting();
+                } catch (error) {
+                }
+                mui.toast('网络不佳');
+            }
+        });
+        return false;
+    })
+    function loginFormSubmit() {
+        $("#loginForm").submit()
+    }
+</script>
+</body>
+</html>
