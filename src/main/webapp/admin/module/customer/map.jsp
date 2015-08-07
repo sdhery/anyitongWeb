@@ -22,6 +22,9 @@
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(${item.mapLongitude}, ${item.mapLatitude});
     map.centerAndZoom(point,15);
+
+    var marker = new BMap.Marker(point);        // 创建标注
+    map.addOverlay(marker);
+
     map.addControl(new BMap.ZoomControl()); //添加地图缩放控件
-    map.panTo(point);
 </script>
