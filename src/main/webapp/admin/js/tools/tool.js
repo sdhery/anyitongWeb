@@ -103,6 +103,16 @@ function printUrl(title, url, gridId, width, height, idFiledName) {
     url += '/' + rowsData[idFiledName]
     $W.open(url)
 }
+//地图
+function map(title, url, gridId, width, height, idFiledName) {
+    var rowsData = $W.contentIFrame.$("#" + gridId).datagrid('getSelected');
+    if (rowsData == null) {
+        tip('请选择要查看的登记人');
+        return;
+    }
+    url += '/' + rowsData[idFiledName]
+    $W.open(url)
+}
 //审批
 function approval(title, url, gridId, width, height, idFiledName) {
     var rowsData = $W.contentIFrame.$("#" + gridId).datagrid('getSelected');
