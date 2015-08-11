@@ -965,28 +965,25 @@
 				
 				<ul class="mui-table-view">
                     <li class="mui-table-view-cell">
-                        <a>姓名</a>
+                        <a>姓名<span class="mui-pull-right" id="customer.realName"></span></a>
                     </li>
                     <li class="mui-table-view-cell">
-                        <a>性别</a>
+                        <a>性别<span class="mui-pull-right" id="customer.sex"></span></a>
                     </li>
 					<li class="mui-table-view-cell">
-                        <a>身份证号码</a>
+                        <a>身份证号码<span class="mui-pull-right" id="customer.idCard"></span></a>
                     </li>
 					<li class="mui-table-view-cell">
-                        <a>住所地址</a>
+                        <a>住所地址<span class="mui-pull-right" id="customer.address"></span></a>
                     </li>
 					<li class="mui-table-view-cell">
-                        <a>交通道路</a>
+                        <a>交通道路<span class="mui-pull-right" id="customer.roadTraffic"></span></a>
                     </li>
 					<li class="mui-table-view-cell">
-                        <a>指示标志</a>
+                        <a>固定电话<span class="mui-pull-right" id="customer.phone"></span></a>
                     </li>
 					<li class="mui-table-view-cell">
-                        <a>固定电话</a>
-                    </li>
-					<li class="mui-table-view-cell">
-                        <a>移动电话</a>
+                        <a>移动电话<span class="mui-pull-right" id="customer.mobilePhone"></span></a>
                     </li>
 					<li class="mui-table-view-cell">
                         <a>居家状况</a>
@@ -1171,6 +1168,28 @@
 //				console.log(e.detail.page.id + ' beforeShow');
         });
         view.addEventListener('pageShow', function (e) {
+				if(e.detail.page.id=="reg6"){
+					$.each($("form[name='customerVoForm'] input"), function (key, value) {
+						if($("span[id='"+value.name+"']").length>0){
+							document.getElementById(value.name).innerHTML=value.value
+						}
+					})
+					$.each($("form[name='customerVoForm'] select"), function (key, value) {
+						if($("span[id='"+value.name+"']").length>0){
+							if(value.name.indexOf("sex")>0){
+								if(value.value=="1"){
+									document.getElementById(value.name).innerHTML="男"
+								}
+								if(value.value=="2"){
+									document.getElementById(value.name).innerHTML="女"
+								}
+							}else{
+								document.getElementById(value.name).innerHTML=value.value
+							}
+							
+						}
+					})
+				}
 //				console.log(e.detail.page.id + ' show');
         });
         view.addEventListener('pageBeforeBack', function (e) {
