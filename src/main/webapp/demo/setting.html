@@ -218,7 +218,7 @@
         <div class="mui-scroll-wrapper">
             <div class="mui-scroll">
 
-                <form class="mui-input-group" name="customerVoForm">
+                <form class="mui-input-group" name="customerVoForm" id="reg1Form">
                     <input type="hidden" name="customer.mapLongitude" id="mapLongitude"/>
                     <input type="hidden" name="customer.mapLatitude" id="mapLatitude"/>
 
@@ -275,9 +275,7 @@
                     </div>
                 </form>
                 <div class="mui-content-padded">
-                    <a href="#reg2">
-                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
-                    </a>
+                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg1Form()">下一步</button>
                 </div>
 
             </div>
@@ -304,7 +302,7 @@
                         <a class="mui-navigate-right" href="#">联络人1</a>
 
                         <div class="mui-collapse-content">
-                            <form class="mui-input-group" name="customerVoForm">
+                            <form class="mui-input-group" name="customerVoForm" id="contactsListForm0">
                                 <div class="mui-input-row">
                                     <label>姓名</label>
                                     <input type="text" placeholder="姓名" name="contactsList[0].realName"/>
@@ -340,7 +338,7 @@
                         <a class="mui-navigate-right" href="#">联络人2</a>
 
                         <div class="mui-collapse-content">
-                            <form class="mui-input-group" name="customerVoForm">
+                            <form class="mui-input-group" name="customerVoForm" id="contactsListForm1">
                                 <div class="mui-input-row">
                                     <label>姓名</label>
                                     <input type="text" placeholder="姓名" name="contactsList[1].realName"/>
@@ -482,9 +480,7 @@
 
                 </ul>
                 <div class="mui-content-padded">
-                    <a href="#reg3">
-                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
-                    </a>
+                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg2Form()">下一步</button>
                 </div>
             </div>
         </div>
@@ -510,7 +506,7 @@
                         <a class="mui-navigate-right" href="#">急救中心</a>
 
                         <div class="mui-collapse-content">
-                            <form class="mui-input-group" name="customerVoForm">
+                            <form class="mui-input-group" name="customerVoForm" id="reliefAgenciesListForm0">
                                 <input type="hidden" name="reliefAgenciesList[0].type" value="5"/>
 
                                 <div class="mui-input-row">
@@ -671,9 +667,7 @@
                 </ul>
 
                 <div class="mui-content-padded">
-                    <a href="#reg4">
-                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
-                    </a>
+                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg3Form()">下一步</button>
                 </div>
             </div>
         </div>
@@ -907,9 +901,7 @@
 
                 </ul>
 				<div class="mui-content-padded">
-					<a href="#reg5">
-						<button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
-					</a>
+						<button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="goView('#reg5')">下一步</button>
 				</div>
             </div>
         </div>
@@ -930,7 +922,7 @@
     <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
             <div class="mui-scroll">
-                <form class="mui-input-group" name="customerVoForm">
+                <form class="mui-input-group" name="customerVoForm" id="reg5Form">
                     <input type="hidden" name="customer.sysUserId" id="sysUserId"/>
 
                     <div class="mui-input-row">
@@ -939,9 +931,7 @@
                     </div>
                 </form>
                 <div class="mui-content-padded">
-                   <a href="#reg6">
-						<button type="button" class="mui-btn mui-btn-primary mui-btn-block">下一步</button>
-					</a>
+                   <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onclick="checkReg5Form()">下一步</button>
                 </div>
             </div>
         </div>
@@ -986,7 +976,10 @@
                         <a>移动电话<span class="mui-pull-right" id="customer.mobilePhone"></span></a>
                     </li>
 					<li class="mui-table-view-cell">
-                        <a>居家状况</a>
+                        <a>居家状况<span class="mui-pull-right" id="customer.homeSituation"></span></a>
+                    </li>
+					<li class="mui-table-view-cell">
+                        <a>购买类型<span class="mui-pull-right" id="customer.purchaseType"></span></a>
                     </li>
 					<li class="mui-table-view-cell">
                         <a>联络人1</a>
@@ -1143,6 +1136,93 @@
         });
     }
     mui.init();
+    function checkReg1Form() {
+        var reg1Form = document.getElementById("reg1Form")
+        if($.trim(reg1Form['customer.realName'].value)==""){
+            mui.toast('请填写姓名');
+            return
+        }
+        var reg = /^[\u4E00-\u9FA5]+$/;
+        if (!reg.test($.trim(reg1Form['customer.realName'].value))) {
+            mui.toast("姓名必需是中文");
+            return;
+        }
+        if($.trim(reg1Form['customer.address'].value)==""){
+            mui.toast('请填写住所地址');
+            return
+        }
+        if($.trim(reg1Form['customer.roadTraffic'].value)==""){
+            mui.toast('请填写交通道路');
+            return
+        }
+        if($.trim(reg1Form['customer.phone'].value)==""){
+            mui.toast('请填写固定电话');
+            return
+        }
+        goView("#reg2")
+    }
+    function checkReg2Form() {
+        var contactsListForm0 = document.getElementById("contactsListForm0")
+        if($.trim(contactsListForm0['contactsList[0].realName'].value)==""){
+            mui.toast('请填写联络人1姓名');
+            return
+        }
+        if($.trim(contactsListForm0['contactsList[0].mobilePhone'].value)==""){
+            mui.toast('请填写联络人1移动电话');
+            return
+        }
+        var contactsListForm1 = document.getElementById("contactsListForm1")
+        if($.trim(contactsListForm1['contactsList[1].realName'].value)==""){
+            mui.toast('请填写联络人2姓名');
+            return
+        }
+        if($.trim(contactsListForm1['contactsList[1].mobilePhone'].value)==""){
+            mui.toast('请填写联络人2移动电话');
+            return
+        }
+        goView("#reg3")
+    }
+    function checkReg3Form() {
+        var reliefAgenciesListForm0 = document.getElementById("reliefAgenciesListForm0")
+        if($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].name'].value)==""){
+            mui.toast('请填写急救中心名称');
+            return
+        }
+        if($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].contact'].value)==""){
+            mui.toast('请填写急救中心联系人/部门');
+            return
+        }
+        if($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].phone'].value)==""){
+            mui.toast('请填写急救中心联系电话');
+            return
+        }
+        if($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].address'].value)==""){
+            mui.toast('请填写急救中心地址');
+            return
+        }
+        goView("#reg4")
+    }
+    function checkReg5Form(){
+        var reg1Form = document.getElementById("reg5Form")
+        if($.trim(reg1Form['customer.pagerId'].value)==""){
+            mui.toast('请填写呼叫器ID');
+            return
+        }
+        $.each($("form[name='customerVoForm'] input"), function (key, value) {
+            if($("span[id='"+value.name+"']").length>0){
+                $("#"+value.name).html(value.value)
+            }
+        })
+        $.each($("form[name='customerVoForm'] select"), function (key, value) {
+            if($("span[id='"+value.name+"']").length>0){
+                $("#"+value.name).html(value.options[value.selectedIndex].text)
+            }
+        })
+        goView("#reg6")
+    }
+    function goView(pagerId) {
+    	viewApi.go(pagerId)
+    }
     //初始化单页view
     var viewApi = mui('#app').view({
         defaultPage: '#setting'
@@ -1152,7 +1232,8 @@
     mui('.mui-scroll-wrapper').scroll();
 
     var view = viewApi.view;
-    (function ($) {
+    
+    (function ($,doc) {
         //处理view的后退与webview后退
         var oldBack = $.back;
         $.back = function () {
@@ -1162,13 +1243,23 @@
                 oldBack();
             }
         };
+
         //监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
         //第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
         view.addEventListener('pageBeforeShow', function (e) {
+			/*if(e.detail.page.id=="reg2"){
+				alert("reg1")
+				e.stopPropagation();
+				e.preventDefault();
+				
+			}
+			console.log(e);
+			return false;*/
+            //viewApi.go("reg2")
 //				console.log(e.detail.page.id + ' beforeShow');
         });
         view.addEventListener('pageShow', function (e) {
-				if(e.detail.page.id=="reg6"){
+				/*if(e.detail.page.id=="reg6"){
 					$.each($("form[name='customerVoForm'] input"), function (key, value) {
 						if($("span[id='"+value.name+"']").length>0){
 							document.getElementById(value.name).innerHTML=value.value
@@ -1176,20 +1267,10 @@
 					})
 					$.each($("form[name='customerVoForm'] select"), function (key, value) {
 						if($("span[id='"+value.name+"']").length>0){
-							if(value.name.indexOf("sex")>0){
-								if(value.value=="1"){
-									document.getElementById(value.name).innerHTML="男"
-								}
-								if(value.value=="2"){
-									document.getElementById(value.name).innerHTML="女"
-								}
-							}else{
-								document.getElementById(value.name).innerHTML=value.value
-							}
-							
+							document.getElementById(value.name).innerHTML=value.value
 						}
 					})
-				}
+				}*/
 //				console.log(e.detail.page.id + ' show');
         });
         view.addEventListener('pageBeforeBack', function (e) {
