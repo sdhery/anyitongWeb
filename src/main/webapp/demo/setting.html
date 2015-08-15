@@ -1173,10 +1173,14 @@
         }
         var contactsListForm1 = document.getElementById("contactsListForm1")
         if($.trim(contactsListForm1['contactsList[1].realName'].value)==""){
+            $("#reg2 .mui-collapse").removeClass("mui-active")
+            $("#reg2 .mui-collapse").eq(1).addClass("mui-active")
             mui.toast('请填写联络人2姓名');
             return
         }
         if($.trim(contactsListForm1['contactsList[1].mobilePhone'].value)==""){
+            $("#reg2 .mui-collapse").removeClass("mui-active")
+            $("#reg2 .mui-collapse").eq(1).addClass("mui-active")
             mui.toast('请填写联络人2移动电话');
             return
         }
@@ -1210,12 +1214,12 @@
         }
         $.each($("form[name='customerVoForm'] input"), function (key, value) {
             if($("span[id='"+value.name+"']").length>0){
-                $("#"+value.name).html(value.value)
+                $("span[id='"+value.name+"']").html(value.value)
             }
         })
         $.each($("form[name='customerVoForm'] select"), function (key, value) {
             if($("span[id='"+value.name+"']").length>0){
-                $("#"+value.name).html(value.options[value.selectedIndex].text)
+                $("span[id='"+value.name+"']").html(value.options[value.selectedIndex].text)
             }
         })
         goView("#reg6")
