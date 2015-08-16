@@ -1422,7 +1422,17 @@
         $.each($("form[name='customerVoForm']"), function (key, value) {
             params = params.concat($(this).serializeArray())
         })
-        console.log(JSON.stringify(params));
+        var Offline = plus.storage.getItem('username');
+        if(Offline){
+			Offline=JSON.parse(Offline)
+			params = params.concat(Offline)
+        }else{
+        	Offline=params
+        }
+		Offline = JSON.stringify(Offline)
+        plus.storage.setItem('Offline', Offline);
+        //JSON.parse(str)
+        console.log(Offline);
     }
     mui.init();
     function checkReg1Form() {
