@@ -1417,6 +1417,13 @@
             }
         });
     }
+    function saveOffline(){
+    	var params = new Array()
+        $.each($("form[name='customerVoForm']"), function (key, value) {
+            params = params.concat($(this).serializeArray())
+        })
+        console.log(JSON.stringify(params));
+    }
     mui.init();
     function checkReg1Form() {
         var reg1Form = document.getElementById("reg1Form")
@@ -1466,6 +1473,7 @@
             mui.toast('请填写联络人2移动电话');
             return
         }
+        saveOffline()
         goView("#reg3")
     }
     function checkReg3Form() {
