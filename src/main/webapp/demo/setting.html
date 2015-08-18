@@ -13,6 +13,7 @@
     <script src="js/tool.js"></script>
     <script>
         mui.plusReady(function () {
+        	plus.storage.removeItem('Offline');
             plus.nativeUI.closeWaiting();
             $("#userName").html(UserInfo.username())
             $("#realName").html(UserInfo.realName())
@@ -1426,20 +1427,23 @@
     }
     function saveOffline(){
     	var params = new Array()
+    	var customerVoList = new Object();
         $.each($("form[name='customerVoForm']"), function (key, value) {
             params = params.concat($(this).serializeArray())
         })
-        var Offline = plus.storage.getItem('username');
+        var Offline = plus.storage.getItem('Offline');
+        //alert("1"+Offline)
         if(Offline){
-			Offline=JSON.parse(Offline)
-			params = params.concat(Offline)
+			customerVoList["customerVoList"]=params
+			Offline=JSON.stringify(new Array(customerVoList,JSON.parse(Offline)))
         }else{
-        	Offline=params
+        	customerVoList["customerVoList"]=params;
+        	Offline = JSON.stringify(customerVoList)
         }
-		Offline = JSON.stringify(Offline)
+		
+		alert(Offline);
         plus.storage.setItem('Offline', Offline);
-        //JSON.parse(str)
-        console.log(Offline);
+       
     }
     mui.init();
     function checkReg1Form() {
@@ -1465,6 +1469,7 @@
             mui.toast('请填写固定电话');
             return
         }
+        saveOffline()
         goView("#reg2")
     }
     function checkReg2Form() {
@@ -1490,7 +1495,7 @@
             mui.toast('请填写联络人2移动电话');
             return
         }
-        saveOffline()
+        //saveOffline()
         goView("#reg3")
     }
     function checkReg3Form() {
