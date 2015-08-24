@@ -1419,6 +1419,7 @@
                 if (errorThrown == "Internal Server Error") {
                     mui.toast('Server Error');
                 } else {
+					saveOffline()//添加离线数据
                     mui.toast('网络不佳');
                 }
 
@@ -1441,7 +1442,7 @@
         	Offline = JSON.stringify(customerVoList)
         }
 		
-		alert(Offline);
+		//alert(Offline);
         plus.storage.setItem('Offline', Offline);
        
     }
@@ -1469,7 +1470,7 @@
             mui.toast('请填写固定电话');
             return
         }
-        saveOffline()
+        //saveOffline()
         goView("#reg2")
     }
     function checkReg2Form() {
