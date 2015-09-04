@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-	<title>设置</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>设置</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link href="css/mui.min.css" rel="stylesheet"/>
@@ -12,8 +13,11 @@
     <script src="js/zepto.js"></script>
     <script src="js/tool.js"></script>
     <script>
+        document.addEventListener('touchstart', function () {
+            return false;
+        }, true);
         mui.plusReady(function () {
-        	plus.storage.removeItem('Offline');
+            plus.storage.removeItem('Offline');
             plus.nativeUI.closeWaiting();
             $("#userName").html(UserInfo.username())
             $("#realName").html(UserInfo.realName())
@@ -170,11 +174,12 @@
         .mui-table-view-divider:after {
             height: 0;
         }
-        .title{
-			margin: 20px 15px 7px;
-			color: #6d6d72;
-			font-size: 15px;
-		}
+
+        .title {
+            margin: 20px 15px 7px;
+            color: #6d6d72;
+            font-size: 15px;
+        }
     </style>
 </head>
 <body>
@@ -281,7 +286,9 @@
                     </div>
                 </form>
                 <div class="mui-content-padded">
-                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg1Form()">下一步</button>
+
+                    <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg1Form()">下一步
+                    </button>
                 </div>
 
             </div>
@@ -486,7 +493,8 @@
 
                 </ul>
                 <div class="mui-content-padded">
-                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg2Form()">下一步</button>
+                    <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg2Form()">下一步
+                    </button>
                 </div>
             </div>
         </div>
@@ -673,7 +681,8 @@
                 </ul>
 
                 <div class="mui-content-padded">
-                        <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg3Form()">下一步</button>
+                    <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="checkReg3Form()">下一步
+                    </button>
                 </div>
             </div>
         </div>
@@ -711,56 +720,58 @@
                         </div>
                     </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">血型</a>
-						<div class="mui-collapse-content">
+
+                        <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[1].type" value="1"/>
-								<select name="healthStatusList[1].statusDes">
+                                <select name="healthStatusList[1].statusDes">
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="AB">AB</option>
-									<option value="O">O</option>
+                                    <option value="O">O</option>
                                 </select>
-							</form>
-						</div>
-					</li>
+                            </form>
+                        </div>
+                    </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">现有疾病</a>
 
                         <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[2].type" value="2"/>
+
                                 <div class="mui-input-row">
                                     <label>现有疾病1</label>
                                     <input type="text" placeholder="现有疾病1" name="healthStatusList[2].statusDesList[0]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>现有疾病2</label>
                                     <input type="text" placeholder="现有疾病2" name="healthStatusList[2].statusDesList[1]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>现有疾病3</label>
                                     <input type="text" placeholder="现有疾病3" name="healthStatusList[2].statusDesList[2]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>现有疾病4</label>
                                     <input type="text" placeholder="现有疾病4" name="healthStatusList[2].statusDesList[3]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>现有疾病5</label>
                                     <input type="text" placeholder="现有疾病5" name="healthStatusList[2].statusDesList[4]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>现有疾病6</label>
                                     <input type="text" placeholder="现有疾病6" name="healthStatusList[2].statusDesList[5]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>现有疾病7</label>
                                     <input type="text" placeholder="现有疾病7" name="healthStatusList[2].statusDesList[6]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>现有疾病8</label>
                                     <input type="text" placeholder="现有疾病8" name="healthStatusList[1].statusDesList[7]"/>
                                 </div>
@@ -768,48 +779,54 @@
                         </div>
                     </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">个人病史</a>
-						<div class="mui-collapse-content">
+
+                        <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[3].type" value="3"/>
-								<div class="mui-input-row">
+
+                                <div class="mui-input-row">
                                     <input type="text" placeholder="个人病史" name="healthStatusList[3].statusDes"/>
                                 </div>
-							</form>
-						</div>
-					</li>
+                            </form>
+                        </div>
+                    </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">病况摘要</a>
-						<div class="mui-collapse-content">
+
+                        <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[4].type" value="4"/>
-								<div class="mui-input-row">
+
+                                <div class="mui-input-row">
                                     <input type="text" placeholder="病况摘要" name="healthStatusList[4].statusDes"/>
                                 </div>
-							</form>
-						</div>
-					</li>
+                            </form>
+                        </div>
+                    </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">常用药</a>
-						<div class="mui-collapse-content">
+
+                        <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[5].type" value="5"/>
+
                                 <div class="mui-input-row">
                                     <label>常用药1</label>
                                     <input type="text" placeholder="常用药1" name="healthStatusList[5].statusDesList[0]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>常用药2</label>
                                     <input type="text" placeholder="常用药2" name="healthStatusList[5].statusDesList[1]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>常用药3</label>
                                     <input type="text" placeholder="常用药3" name="healthStatusList[5].statusDesList[2]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>常用药4</label>
                                     <input type="text" placeholder="常用药4" name="healthStatusList[5].statusDesList[3]"/>
                                 </div>
@@ -817,24 +834,26 @@
                         </div>
                     </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">禁忌药</a>
-						<div class="mui-collapse-content">
+
+                        <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[6].type" value="6"/>
+
                                 <div class="mui-input-row">
                                     <label>禁忌药1</label>
                                     <input type="text" placeholder="禁忌药1" name="healthStatusList[6].statusDesList[0]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>禁忌药2</label>
                                     <input type="text" placeholder="禁忌药2" name="healthStatusList[6].statusDesList[1]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>禁忌药3</label>
                                     <input type="text" placeholder="禁忌药3" name="healthStatusList[6].statusDesList[2]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>禁忌药4</label>
                                     <input type="text" placeholder="禁忌药4" name="healthStatusList[6].statusDesList[3]"/>
                                 </div>
@@ -842,24 +861,26 @@
                         </div>
                     </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">过敏史</a>
-						<div class="mui-collapse-content">
+
+                        <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[7].type" value="7"/>
+
                                 <div class="mui-input-row">
                                     <label>过敏史1</label>
                                     <input type="text" placeholder="过敏史1" name="healthStatusList[7].statusDesList[0]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>过敏史2</label>
                                     <input type="text" placeholder="过敏史2" name="healthStatusList[7].statusDesList[1]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>过敏史3</label>
                                     <input type="text" placeholder="过敏史3" name="healthStatusList[7].statusDesList[2]"/>
                                 </div>
-								<div class="mui-input-row">
+                                <div class="mui-input-row">
                                     <label>过敏史4</label>
                                     <input type="text" placeholder="过敏史4" name="healthStatusList[7].statusDesList[3]"/>
                                 </div>
@@ -867,31 +888,35 @@
                         </div>
                     </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">挂钩医院</a>
-						<div class="mui-collapse-content">
+
+                        <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[8].type" value="8"/>
-								<div class="mui-input-row">
+
+                                <div class="mui-input-row">
                                     <input type="text" placeholder="挂钩医院" name="healthStatusList[8].statusDes"/>
                                 </div>
-							</form>
-						</div>
-					</li>
+                            </form>
+                        </div>
+                    </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">诊疗卡号/病历编号</a>
-						<div class="mui-collapse-content">
+
+                        <div class="mui-collapse-content">
                             <form class="mui-input-group" name="customerVoForm">
                                 <input type="hidden" name="healthStatusList[9].type" value="9"/>
-								<div class="mui-input-row">
+
+                                <div class="mui-input-row">
                                     <input type="text" placeholder="诊疗卡号/病历编号" name="healthStatusList[9].statusDes"/>
                                 </div>
-							</form>
-						</div>
-					</li>
+                            </form>
+                        </div>
+                    </li>
 
-					<li class="mui-table-view-cell mui-collapse">
+                    <li class="mui-table-view-cell mui-collapse">
                         <a class="mui-navigate-right" href="#">付费方式</a>
 
                         <div class="mui-collapse-content">
@@ -906,9 +931,10 @@
                     </li>
 
                 </ul>
-				<div class="mui-content-padded">
-						<button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="goView('#reg5')">下一步</button>
-				</div>
+                <div class="mui-content-padded">
+                    <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="goView('#reg5')">下一步
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -937,7 +963,22 @@
                     </div>
                 </form>
                 <div class="mui-content-padded">
-                   <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onclick="checkReg5Form()">下一步</button>
+
+                    <div class="title">
+                        身份证照片
+                    </div>
+                    <ul id="files1" style="text-align:left;">
+                    </ul>
+                    <button onclick="appendByGallery(1,'certPicPath')" class="btn mui-btn mui-btn-block">身份证上传</button>
+
+                    <div class="title">
+                        地图截图
+                    </div>
+                    <ul id="files2" style="text-align:left;">
+                    </ul>
+                    <button onclick="appendByGallery(2,'mapPicPath')" class="btn mui-btn mui-btn-block">地图截图</button>
+                    <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onclick="checkReg5Form()">下一步
+                    </button>
                 </div>
             </div>
         </div>
@@ -958,389 +999,389 @@
     <div class="mui-page-content">
         <div class="mui-scroll-wrapper">
             <div class="mui-scroll">
-				
-				<div class="title">
-					基本资料
-				</div>
-				<ul class="mui-table-view">
+
+                <div class="title">
+                    基本资料
+                </div>
+                <ul class="mui-table-view">
                     <li class="mui-table-view-cell">
                         <a>姓名<span class="mui-pull-right" id="customer.realName"></span></a>
                     </li>
                     <li class="mui-table-view-cell">
                         <a>性别<span class="mui-pull-right" id="customer.sex"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>身份证号码<span class="mui-pull-right" id="customer.idCard"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>住所地址<span class="mui-pull-right" id="customer.address"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>交通道路<span class="mui-pull-right" id="customer.roadTraffic"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>固定电话<span class="mui-pull-right" id="customer.phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>移动电话<span class="mui-pull-right" id="customer.mobilePhone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>居家状况<span class="mui-pull-right" id="customer.homeSituation"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>购买类型<span class="mui-pull-right" id="customer.purchaseType"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					联络人1
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    联络人1
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>姓名<span class="mui-pull-right" id="contactsList[0].realName"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>性别<span class="mui-pull-right" id="contactsList[0].sex"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>关系<span class="mui-pull-right" id="contactsList[0].bind"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>固定电话<span class="mui-pull-right" id="contactsList[0].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>移动电话<span class="mui-pull-right" id="contactsList[0].mobilePhone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>住址/说明<span class="mui-pull-right" id="contactsList[0].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					联络人2
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    联络人2
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>姓名<span class="mui-pull-right" id="contactsList[1].realName"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>性别<span class="mui-pull-right" id="contactsList[1].sex"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>关系<span class="mui-pull-right" id="contactsList[1].bind"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>固定电话<span class="mui-pull-right" id="contactsList[1].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>移动电话<span class="mui-pull-right" id="contactsList[1].mobilePhone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>住址/说明<span class="mui-pull-right" id="contactsList[1].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					联络人3
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    联络人3
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>姓名<span class="mui-pull-right" id="contactsList[2].realName"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>性别<span class="mui-pull-right" id="contactsList[2].sex"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>关系<span class="mui-pull-right" id="contactsList[2].bind"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>固定电话<span class="mui-pull-right" id="contactsList[2].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>移动电话<span class="mui-pull-right" id="contactsList[2].mobilePhone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>住址/说明<span class="mui-pull-right" id="contactsList[2].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					联络人4
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    联络人4
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>姓名<span class="mui-pull-right" id="contactsList[3].realName"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>性别<span class="mui-pull-right" id="contactsList[3].sex"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>关系<span class="mui-pull-right" id="contactsList[3].bind"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>固定电话<span class="mui-pull-right" id="contactsList[3].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>移动电话<span class="mui-pull-right" id="contactsList[3].mobilePhone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>住址/说明<span class="mui-pull-right" id="contactsList[3].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					联络人5
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    联络人5
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>姓名<span class="mui-pull-right" id="contactsList[4].realName"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>性别<span class="mui-pull-right" id="contactsList[4].sex"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>关系<span class="mui-pull-right" id="contactsList[4].bind"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>固定电话<span class="mui-pull-right" id="contactsList[4].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>移动电话<span class="mui-pull-right" id="contactsList[4].mobilePhone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>住址/说明<span class="mui-pull-right" id="contactsList[4].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					救助机构&nbsp;急救中心
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    救助机构&nbsp;急救中心
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>名称<span class="mui-pull-right" id="reliefAgenciesList[0].name"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系人/部门<span class="mui-pull-right" id="reliefAgenciesList[0].contact"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系电话<span class="mui-pull-right" id="reliefAgenciesList[0].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>地址/移动电话<span class="mui-pull-right" id="reliefAgenciesList[0].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					救助机构&nbsp;街道/镇
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    救助机构&nbsp;街道/镇
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>名称<span class="mui-pull-right" id="reliefAgenciesList[1].name"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系人/部门<span class="mui-pull-right" id="reliefAgenciesList[1].contact"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系电话<span class="mui-pull-right" id="reliefAgenciesList[1].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>地址/移动电话<span class="mui-pull-right" id="reliefAgenciesList[1].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					救助机构&nbsp;派出所
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    救助机构&nbsp;派出所
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>名称<span class="mui-pull-right" id="reliefAgenciesList[2].name"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系人/部门<span class="mui-pull-right" id="reliefAgenciesList[2].contact"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系电话<span class="mui-pull-right" id="reliefAgenciesList[2].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>地址/移动电话<span class="mui-pull-right" id="reliefAgenciesList[2].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					救助机构&nbsp;村/居委
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    救助机构&nbsp;村/居委
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>名称<span class="mui-pull-right" id="reliefAgenciesList[3].name"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系人/部门<span class="mui-pull-right" id="reliefAgenciesList[3].contact"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系电话<span class="mui-pull-right" id="reliefAgenciesList[3].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>地址/移动电话<span class="mui-pull-right" id="reliefAgenciesList[3].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					救助机构&nbsp;服务中心
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    救助机构&nbsp;服务中心
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>名称<span class="mui-pull-right" id="reliefAgenciesList[4].name"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系人/部门<span class="mui-pull-right" id="reliefAgenciesList[4].contact"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系电话<span class="mui-pull-right" id="reliefAgenciesList[4].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>地址/移动电话<span class="mui-pull-right" id="reliefAgenciesList[4].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					救助机构&nbsp;服务中心
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    救助机构&nbsp;服务中心
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>名称<span class="mui-pull-right" id="reliefAgenciesList[5].name"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系人/部门<span class="mui-pull-right" id="reliefAgenciesList[5].contact"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>联系电话<span class="mui-pull-right" id="reliefAgenciesList[5].phone"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>地址/移动电话<span class="mui-pull-right" id="reliefAgenciesList[5].address"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					健康状况
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    健康状况
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>身体状况<span class="mui-pull-right" id="healthStatusList[0].statusDes"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>血型<span class="mui-pull-right" id="healthStatusList[1].statusDes"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>个人病史<span class="mui-pull-right" id="healthStatusList[3].statusDes"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>病况摘要<span class="mui-pull-right" id="healthStatusList[4].statusDes"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>挂钩医院<span class="mui-pull-right" id="healthStatusList[8].statusDes"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>诊疗卡号/病历编号<span class="mui-pull-right" id="healthStatusList[9].statusDes"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>付费方式<span class="mui-pull-right" id="healthStatusList[10].statusDes"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					现有病史
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    现有病史
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>现有病史1<span class="mui-pull-right" id="healthStatusList[2].statusDesList[0]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>现有病史2<span class="mui-pull-right" id="healthStatusList[2].statusDesList[1]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>现有病史3<span class="mui-pull-right" id="healthStatusList[2].statusDesList[2]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>现有病史4<span class="mui-pull-right" id="healthStatusList[2].statusDesList[3]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>现有病史5<span class="mui-pull-right" id="healthStatusList[2].statusDesList[4]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>现有病史6<span class="mui-pull-right" id="healthStatusList[2].statusDesList[5]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>现有病史7<span class="mui-pull-right" id="healthStatusList[2].statusDesList[6]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>现有病史8<span class="mui-pull-right" id="healthStatusList[2].statusDesList[7]"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					常用药
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    常用药
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>常用药1<span class="mui-pull-right" id="healthStatusList[5].statusDesList[0]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>常用药2<span class="mui-pull-right" id="healthStatusList[5].statusDesList[1]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>常用药3<span class="mui-pull-right" id="healthStatusList[5].statusDesList[2]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>常用药4<span class="mui-pull-right" id="healthStatusList[5].statusDesList[3]"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					禁忌药
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    禁忌药
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>禁忌药1<span class="mui-pull-right" id="healthStatusList[6].statusDesList[0]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>禁忌药2<span class="mui-pull-right" id="healthStatusList[6].statusDesList[1]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>禁忌药3<span class="mui-pull-right" id="healthStatusList[6].statusDesList[2]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>禁忌药4<span class="mui-pull-right" id="healthStatusList[6].statusDesList[3]"></span></a>
                     </li>
-				</ul>
+                </ul>
 
-				<div class="title">
-					过敏史
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                <div class="title">
+                    过敏史
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>过敏史1<span class="mui-pull-right" id="healthStatusList[7].statusDesList[0]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>过敏史2<span class="mui-pull-right" id="healthStatusList[7].statusDesList[1]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>过敏史3<span class="mui-pull-right" id="healthStatusList[7].statusDesList[2]"></span></a>
                     </li>
-					<li class="mui-table-view-cell">
+                    <li class="mui-table-view-cell">
                         <a>过敏史4<span class="mui-pull-right" id="healthStatusList[7].statusDesList[3]"></span></a>
                     </li>
-				</ul>
-				<div class="title">
-					业务资料
-				</div>
-				<ul class="mui-table-view">
-					<li class="mui-table-view-cell">
+                </ul>
+                <div class="title">
+                    业务资料
+                </div>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
                         <a>呼叫器ID<span class="mui-pull-right" id="customer.pagerId"></span></a>
                     </li>
                 </ul>
 
                 <div class="mui-content-padded">
-                   <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="customerFormSubmit()">
+                    <button type="button" class="mui-btn mui-btn-primary mui-btn-block" onClick="customerFormSubmit()">
                         提交
                     </button>
                 </div>
@@ -1378,11 +1419,61 @@
     </div>
 </div>
 <script>
+    var files = [];
+    var uploadTag
+    var uploadName
+    var server = "http://192.168.1.2/customer/register";
+    // 从相册添加文件
+    function appendByGallery(tag, name) {
+        uploadTag = tag
+        uploadName = name
+        plus.gallery.pick(function (path) {
+            appendFile(path);
+        });
+    }
+    function appendFile(p) {
+        //var fe=document.getElementById("files"+uploadTag);
+        var li = document.createElement("li");
+        var n = p.substr(p.lastIndexOf('/') + 1);
+        li.innerText = n;
+        $("#files" + uploadTag).html(li)
+        //fe.appendChild(li);
+        files.push({name: "" + uploadName + "", path: p});
+    }
+    function upload() {
+        mui.toast('开始上传');
+        var wt = plus.nativeUI.showWaiting();
+        var task = plus.uploader.createUpload(server,
+                {method: "POST"},
+                function (t, status) { //上传完成plus.storage.setItem("uploader",t.responseText);
+                    if (status == 200) {
+                        wt.close();
+                        mui.toast("上传成功：");
+                    } else {
+                        mui.toast("上传失败：" + status);
+                        wt.close();
+                    }
+                }
+        );
+        $.each($("form[name='customerVoForm']"), function (key, value) {
+            $.each($(this).serializeArray(), function (key1, value1) {
+                task.addData($(this).prop("name"), $(this).val());
+            })
+        })
+        for (var i = 0; i < files.length; i++) {
+            var f = files[i];
+            task.addFile(f.path, {key: f.name});
+        }
+        console.log(task)
+        task.start();
+    }
     function loginOut() {
         window.location.href = "login.html"
         UserInfo.clear()
     }
     function customerFormSubmit() {
+        upload()
+        return
         try {
             plus.nativeUI.showWaiting();
         } catch (error) {
@@ -1419,37 +1510,36 @@
                 if (errorThrown == "Internal Server Error") {
                     mui.toast('Server Error');
                 } else {
-					saveOffline()//添加离线数据
+                    saveOffline()//添加离线数据
                     mui.toast('网络不佳');
                 }
 
             }
         });
     }
-    function saveOffline(){
-    	var params = new Array()
-    	var customerVoList = new Object();
+    function saveOffline() {
+        var params = new Array()
+        var customerVoList = new Object();
         $.each($("form[name='customerVoForm']"), function (key, value) {
             params = params.concat($(this).serializeArray())
         })
         var Offline = plus.storage.getItem('Offline');
         //alert("1"+Offline)
-        if(Offline){
-			customerVoList["customerVoList"]=params
-			Offline=JSON.stringify(new Array(customerVoList,JSON.parse(Offline)))
-        }else{
-        	customerVoList["customerVoList"]=params;
-        	Offline = JSON.stringify(customerVoList)
+        if (Offline) {
+            customerVoList["customerVoList"] = params
+            Offline = JSON.stringify(new Array(customerVoList, JSON.parse(Offline)))
+        } else {
+            customerVoList["customerVoList"] = params;
+            Offline = JSON.stringify(customerVoList)
         }
-		
-		//alert(Offline);
+
+        //alert(Offline);
         plus.storage.setItem('Offline', Offline);
-       
+
     }
-    mui.init();
     function checkReg1Form() {
         var reg1Form = document.getElementById("reg1Form")
-        if($.trim(reg1Form['customer.realName'].value)==""){
+        if ($.trim(reg1Form['customer.realName'].value) == "") {
             mui.toast('请填写姓名');
             return
         }
@@ -1458,39 +1548,40 @@
             mui.toast("姓名必需是中文");
             return;
         }
-        if($.trim(reg1Form['customer.address'].value)==""){
+        if ($.trim(reg1Form['customer.address'].value) == "") {
             mui.toast('请填写住所地址');
             return
         }
-        if($.trim(reg1Form['customer.roadTraffic'].value)==""){
+        if ($.trim(reg1Form['customer.roadTraffic'].value) == "") {
             mui.toast('请填写交通道路');
             return
         }
-        if($.trim(reg1Form['customer.phone'].value)==""){
+        if ($.trim(reg1Form['customer.phone'].value) == "") {
             mui.toast('请填写固定电话');
             return
         }
         //saveOffline()
+        //upload()
         goView("#reg2")
     }
     function checkReg2Form() {
         var contactsListForm0 = document.getElementById("contactsListForm0")
-        if($.trim(contactsListForm0['contactsList[0].realName'].value)==""){
+        if ($.trim(contactsListForm0['contactsList[0].realName'].value) == "") {
             mui.toast('请填写联络人1姓名');
             return
         }
-        if($.trim(contactsListForm0['contactsList[0].mobilePhone'].value)==""){
+        if ($.trim(contactsListForm0['contactsList[0].mobilePhone'].value) == "") {
             mui.toast('请填写联络人1移动电话');
             return
         }
         var contactsListForm1 = document.getElementById("contactsListForm1")
-        if($.trim(contactsListForm1['contactsList[1].realName'].value)==""){
+        if ($.trim(contactsListForm1['contactsList[1].realName'].value) == "") {
             $("#reg2 .mui-collapse").removeClass("mui-active")
             $("#reg2 .mui-collapse").eq(1).addClass("mui-active")
             mui.toast('请填写联络人2姓名');
             return
         }
-        if($.trim(contactsListForm1['contactsList[1].mobilePhone'].value)==""){
+        if ($.trim(contactsListForm1['contactsList[1].mobilePhone'].value) == "") {
             $("#reg2 .mui-collapse").removeClass("mui-active")
             $("#reg2 .mui-collapse").eq(1).addClass("mui-active")
             mui.toast('请填写联络人2移动电话');
@@ -1501,44 +1592,44 @@
     }
     function checkReg3Form() {
         var reliefAgenciesListForm0 = document.getElementById("reliefAgenciesListForm0")
-        if($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].name'].value)==""){
+        if ($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].name'].value) == "") {
             mui.toast('请填写急救中心名称');
             return
         }
-        if($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].contact'].value)==""){
+        if ($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].contact'].value) == "") {
             mui.toast('请填写急救中心联系人/部门');
             return
         }
-        if($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].phone'].value)==""){
+        if ($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].phone'].value) == "") {
             mui.toast('请填写急救中心联系电话');
             return
         }
-        if($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].address'].value)==""){
+        if ($.trim(reliefAgenciesListForm0['reliefAgenciesList[0].address'].value) == "") {
             mui.toast('请填写急救中心地址');
             return
         }
         goView("#reg4")
     }
-    function checkReg5Form(){
+    function checkReg5Form() {
         var reg1Form = document.getElementById("reg5Form")
-        if($.trim(reg1Form['customer.pagerId'].value)==""){
+        if ($.trim(reg1Form['customer.pagerId'].value) == "") {
             mui.toast('请填写呼叫器ID');
             return
         }
         $.each($("form[name='customerVoForm'] input"), function (key, value) {
-            if($("span[id='"+value.name+"']").length>0){
-                $("span[id='"+value.name+"']").html(value.value)
+            if ($("span[id='" + value.name + "']").length > 0) {
+                $("span[id='" + value.name + "']").html(value.value)
             }
         })
         $.each($("form[name='customerVoForm'] select"), function (key, value) {
-            if($("span[id='"+value.name+"']").length>0){
-                $("span[id='"+value.name+"']").html(value.options[value.selectedIndex].text)
+            if ($("span[id='" + value.name + "']").length > 0) {
+                $("span[id='" + value.name + "']").html(value.options[value.selectedIndex].text)
             }
         })
         goView("#reg6")
     }
     function goView(pagerId) {
-    	viewApi.go(pagerId)
+        viewApi.go(pagerId)
     }
     //初始化单页view
     var viewApi = mui('#app').view({
@@ -1549,8 +1640,8 @@
     mui('.mui-scroll-wrapper').scroll();
 
     var view = viewApi.view;
-    
-    (function ($,doc) {
+
+    (function ($, doc) {
         //处理view的后退与webview后退
         var oldBack = $.back;
         $.back = function () {
@@ -1564,30 +1655,30 @@
         //监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
         //第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
         view.addEventListener('pageBeforeShow', function (e) {
-			/*if(e.detail.page.id=="reg2"){
-				alert("reg1")
-				e.stopPropagation();
-				e.preventDefault();
-				
-			}
-			console.log(e);
-			return false;*/
+            /*if(e.detail.page.id=="reg2"){
+             alert("reg1")
+             e.stopPropagation();
+             e.preventDefault();
+
+             }
+             console.log(e);
+             return false;*/
             //viewApi.go("reg2")
 //				console.log(e.detail.page.id + ' beforeShow');
         });
         view.addEventListener('pageShow', function (e) {
-				/*if(e.detail.page.id=="reg6"){
-					$.each($("form[name='customerVoForm'] input"), function (key, value) {
-						if($("span[id='"+value.name+"']").length>0){
-							document.getElementById(value.name).innerHTML=value.value
-						}
-					})
-					$.each($("form[name='customerVoForm'] select"), function (key, value) {
-						if($("span[id='"+value.name+"']").length>0){
-							document.getElementById(value.name).innerHTML=value.value
-						}
-					})
-				}*/
+            /*if(e.detail.page.id=="reg6"){
+             $.each($("form[name='customerVoForm'] input"), function (key, value) {
+             if($("span[id='"+value.name+"']").length>0){
+             document.getElementById(value.name).innerHTML=value.value
+             }
+             })
+             $.each($("form[name='customerVoForm'] select"), function (key, value) {
+             if($("span[id='"+value.name+"']").length>0){
+             document.getElementById(value.name).innerHTML=value.value
+             }
+             })
+             }*/
 //				console.log(e.detail.page.id + ' show');
         });
         view.addEventListener('pageBeforeBack', function (e) {
