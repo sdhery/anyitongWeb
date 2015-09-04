@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -49,13 +50,21 @@ public class CustomerController extends BaseController<Customer,Integer> {
         return map;
     }
 
+    /**
+     *
+     * @param customerVo
+     * @param customerVoList
+     * @param mapPicPath
+     * @param certPicPath
+     * @return
+     */
     @RequestMapping(value="register",method= RequestMethod.POST)
     @ResponseBody
-    public ModelMap register(CustomerVo customerVo){
+    public ModelMap register(CustomerVo customerVo,String[] customerVoList,MultipartFile mapPicPath,MultipartFile certPicPath){
         ModelMap map = new ModelMap();
         setFailure(map);
         try{
-            customerService.saveCustomerVo(customerVo);
+            customerService.saveCustomerVo(customerVo,mapPicPath,certPicPath);
             setSuccess(map);
         }catch (Exception e){
             e.printStackTrace();

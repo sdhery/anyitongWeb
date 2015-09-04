@@ -23,6 +23,7 @@ public class Customer extends BaseDomain {
     private Integer approvalStatus;
     private String approvalDes;
     private Integer approvalSysUserId;
+    private String certPicPath;
 
     public String getRealName() {
         return realName;
@@ -174,5 +175,13 @@ public class Customer extends BaseDomain {
 
     public void setApprovalSysUserId(Integer approvalSysUserId) {
         this.approvalSysUserId = approvalSysUserId;
+    }
+
+    public String getCertPicPath() {
+        return certPicPath;
+    }
+
+    public void setCertPicPath(String certPicPath) {
+        this.certPicPath = certPicPath;
     }
 }

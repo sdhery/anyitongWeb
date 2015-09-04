@@ -1,6 +1,7 @@
 package com.framework.module.customer.service.impl;
 
 import com.framework.common.service.impl.BaseService;
+import com.framework.common.util.FileUtil;
 import com.framework.module.customer.dao.IContactsDao;
 import com.framework.module.customer.dao.IHealthStatusDao;
 import com.framework.module.customer.dao.IReliefAgenciesDao;
@@ -17,6 +18,8 @@ import com.framework.module.customer.vo.CustomerVoList;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -33,11 +36,15 @@ public class CustomerService extends BaseService<Customer, Integer> implements I
     private IHealthStatusService healthStatusService;
 
 
-    public void saveCustomerVo(CustomerVo customerVo) throws Exception{
+    @Transactional
+    public void saveCustomerVo(CustomerVo customerVo,MultipartFile mapPicPath,MultipartFile certPicPath){
         Customer customer = customerVo.getCustomer();
         save(customer);
         int customerId = customer.getCustomerId();
-        for (Contacts contacts : customerVo.getContactsList()) {
+        //save mapPicPath
+        customer.setMapPicPath(FileUtil.saveFile(customerId, mapPicPath, "_mapPic"));
+        customer.setMapPicPath(FileUtil.saveFile(customerId, certPicPath, "_certPic"));
+        /*for (Contacts contacts : customerVo.getContactsList()) {
             contacts.setCustomerId(customerId);
             contactsService.save(contacts);
         }
@@ -62,7 +69,7 @@ public class CustomerService extends BaseService<Customer, Integer> implements I
                 healthStatus.setStatusDes(statusDesBuffer.toString());
             }
             healthStatusService.save(healthStatus);
-        }
+        }*/
     }
 
     public CustomerVo getCustomerVoByCustomerId(Integer customerId) {
