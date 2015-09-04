@@ -23,6 +23,7 @@
         <result column="approvalStatus" property="approvalStatus"/>
         <result column="approvalDes" property="approvalDes"/>
         <result column="approvalSysUserId" property="approvalSysUserId"/>
+        <result column="certPicPath" property="certPicPath"/>
     </resultMap>
 
     <!-- 表名 -->
@@ -50,13 +51,14 @@
         approvalStatus,
         approvalDes,
         approvalSysUserId,
-        lastModifiedTime
+        lastModifiedTime,
+        certPicPath
     </sql>
 
     <insert id="save" parameterType="com.framework.module.customer.domain.Customer" keyProperty="customerId" useGeneratedKeys="true" >
         insert into <include refid="tableNameSql"/>
-        (realName,sysUserId,pagerId,sex,address,purchaseType,homeSituation,mobilePhone,phone,roadTraffic,createTime,lastModifiedTime,mapLongitude,mapLatitude,mapPicPath,recordPath)
-        values (#{realName},#{sysUserId},#{pagerId},#{sex},#{address},#{purchaseType},#{homeSituation},#{mobilePhone},#{phone},#{roadTraffic},#{createTime},#{lastModifiedTime},#{mapLongitude},#{mapLatitude},#{mapPicPath},#{recordPath})
+        (realName,sysUserId,pagerId,sex,address,purchaseType,homeSituation,mobilePhone,phone,roadTraffic,createTime,lastModifiedTime,mapLongitude,mapLatitude,mapPicPath,recordPath,certPicPath)
+        values (#{realName},#{sysUserId},#{pagerId},#{sex},#{address},#{purchaseType},#{homeSituation},#{mobilePhone},#{phone},#{roadTraffic},#{createTime},#{lastModifiedTime},#{mapLongitude},#{mapLatitude},#{mapPicPath},#{recordPath},#{certPicPath})
     </insert>
 
     <sql id="mainSql">
@@ -141,7 +143,7 @@
     </resultMap>
 
     <select id="findCustomerVoList" parameterType="com.framework.module.customer.domain.Customer" resultMap="CustomerVoListResultMap">
-        SELECT t.*,t2.realName AS editRealName FROM prd_customer t LEFT JOIN sys_user t2 ON t.approvalSysUserId= t2.SYS_USER_ID
+        SELECT t.*,t2.realName AS editRealName FROM prd_customer t INNER JOIN sys_user t2 ON t.approvalSysUserId= t2.SYS_USER_ID
         <include refid="varSql"/>
         ORDER BY createTime DESC,lastModifiedTime DESC
     </select>
