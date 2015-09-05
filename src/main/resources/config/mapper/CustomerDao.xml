@@ -24,6 +24,7 @@
         <result column="approvalDes" property="approvalDes"/>
         <result column="approvalSysUserId" property="approvalSysUserId"/>
         <result column="certPicPath" property="certPicPath"/>
+        <result column="backCertPicPath" property="backCertPicPath"/>
     </resultMap>
 
     <!-- 表名 -->
@@ -52,13 +53,14 @@
         approvalDes,
         approvalSysUserId,
         lastModifiedTime,
-        certPicPath
+        certPicPath,
+        backCertPicPath
     </sql>
 
     <insert id="save" parameterType="com.framework.module.customer.domain.Customer" keyProperty="customerId" useGeneratedKeys="true" >
         insert into <include refid="tableNameSql"/>
-        (realName,sysUserId,pagerId,sex,address,purchaseType,homeSituation,mobilePhone,phone,roadTraffic,createTime,lastModifiedTime,mapLongitude,mapLatitude,mapPicPath,recordPath,certPicPath)
-        values (#{realName},#{sysUserId},#{pagerId},#{sex},#{address},#{purchaseType},#{homeSituation},#{mobilePhone},#{phone},#{roadTraffic},#{createTime},#{lastModifiedTime},#{mapLongitude},#{mapLatitude},#{mapPicPath},#{recordPath},#{certPicPath})
+        (realName,sysUserId,pagerId,sex,address,purchaseType,homeSituation,mobilePhone,phone,roadTraffic,createTime,lastModifiedTime,mapLongitude,mapLatitude,mapPicPath,recordPath,certPicPath,backCertPicPath)
+        values (#{realName},#{sysUserId},#{pagerId},#{sex},#{address},#{purchaseType},#{homeSituation},#{mobilePhone},#{phone},#{roadTraffic},#{createTime},#{lastModifiedTime},#{mapLongitude},#{mapLatitude},#{mapPicPath},#{recordPath},#{certPicPath},#{backCertPicPath})
     </insert>
 
     <sql id="mainSql">
