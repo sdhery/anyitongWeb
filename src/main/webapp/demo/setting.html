@@ -967,9 +967,13 @@
                     <div class="title">
                         身份证照片
                     </div>
+                    <ul id="files0" style="text-align:left;">
+                    </ul>
+                    <button onclick="appendByGallery(0,'certPicPath')" class="btn mui-btn mui-btn-block">身份证正面上传</button>
+
                     <ul id="files1" style="text-align:left;">
                     </ul>
-                    <button onclick="appendByGallery(1,'certPicPath')" class="btn mui-btn mui-btn-block">身份证上传</button>
+                    <button onclick="appendByGallery(1,'backCertPicPath')" class="btn mui-btn mui-btn-block">身份证背面上传</button>
 
                     <div class="title">
                         地图截图
@@ -1419,7 +1423,7 @@
     </div>
 </div>
 <script>
-    var files = [];
+    var files = new Array(3);
     var uploadTag
     var uploadName
     var server = "http://192.168.1.2/customer/register";
@@ -1438,7 +1442,7 @@
         li.innerText = n;
         $("#files" + uploadTag).html(li)
         //fe.appendChild(li);
-        files.push({name: "" + uploadName + "", path: p});
+        files[uploadTag]={name: "" + uploadName + "", path: p};
     }
     function upload() {
         mui.toast('开始上传');
