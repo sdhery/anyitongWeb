@@ -37,13 +37,14 @@ public class CustomerService extends BaseService<Customer, Integer> implements I
 
 
     @Transactional
-    public void saveCustomerVo(CustomerVo customerVo,MultipartFile mapPicPath,MultipartFile certPicPath){
+    public void saveCustomerVo(CustomerVo customerVo,MultipartFile mapPicPath,MultipartFile certPicPath,MultipartFile backCertPicPath){
         Customer customer = customerVo.getCustomer();
         save(customer);
         int customerId = customer.getCustomerId();
         //save mapPicPath
         customer.setMapPicPath(FileUtil.saveFile(customerId, mapPicPath, "_mapPic"));
         customer.setMapPicPath(FileUtil.saveFile(customerId, certPicPath, "_certPic"));
+        customer.setBackCertPicPath(FileUtil.saveFile(customerId, backCertPicPath, "_backCertPic"));
         /*for (Contacts contacts : customerVo.getContactsList()) {
             contacts.setCustomerId(customerId);
             contactsService.save(contacts);

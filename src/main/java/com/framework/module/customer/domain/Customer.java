@@ -24,6 +24,7 @@ public class Customer extends BaseDomain {
     private String approvalDes;
     private Integer approvalSysUserId;
     private String certPicPath;
+    private String backCertPicPath;
 
     public String getRealName() {
         return realName;
@@ -183,5 +184,13 @@ public class Customer extends BaseDomain {
 
     public void setCertPicPath(String certPicPath) {
         this.certPicPath = certPicPath;
+    }
+
+    public String getBackCertPicPath() {
+        return backCertPicPath;
+    }
+
+    public void setBackCertPicPath(String backCertPicPath) {
+        this.backCertPicPath = backCertPicPath;
     }
 }

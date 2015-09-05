@@ -60,11 +60,11 @@ public class CustomerController extends BaseController<Customer,Integer> {
      */
     @RequestMapping(value="register",method= RequestMethod.POST)
     @ResponseBody
-    public ModelMap register(CustomerVo customerVo,String[] customerVoList,MultipartFile mapPicPath,MultipartFile certPicPath){
+    public ModelMap register(CustomerVo customerVo,String[] customerVoList,MultipartFile mapPicPath,MultipartFile certPicPath,MultipartFile backCertPicPath){
         ModelMap map = new ModelMap();
         setFailure(map);
         try{
-            customerService.saveCustomerVo(customerVo,mapPicPath,certPicPath);
+            customerService.saveCustomerVo(customerVo,mapPicPath,certPicPath,backCertPicPath);
             setSuccess(map);
         }catch (Exception e){
             e.printStackTrace();

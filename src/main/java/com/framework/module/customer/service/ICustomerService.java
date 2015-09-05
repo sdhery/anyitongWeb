@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public interface ICustomerService extends IService<Customer,Integer> {
-    public void saveCustomerVo(CustomerVo customerVo,MultipartFile mapPicPath,MultipartFile certPicPath);
+    public void saveCustomerVo(CustomerVo customerVo,MultipartFile mapPicPath,MultipartFile certPicPath,MultipartFile backCertPicPath);
 
     public CustomerVo getCustomerVoByCustomerId(Integer customerId);
 
