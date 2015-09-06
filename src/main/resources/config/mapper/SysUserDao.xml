@@ -39,7 +39,7 @@
 
     <!-- 按主键查找条件语句 -->
     <sql id="conditionOnlyId">
-        SYS_USER_ID = #{sysUserId}
+        SYS_USER_ID = #{id}
     </sql>
 
     <sql id="mainSql">
@@ -81,7 +81,7 @@
         </if>
     </select>
 
-    <select id="findById" parameterType="String" resultMap="BaseSysUserResultMap">
+    <select id="findById" parameterType="java.lang.Integer" resultMap="BaseSysUserResultMap">
         <include refid="mainSql"/>
         where
         <include refid="conditionOnlyId"/>
