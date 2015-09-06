@@ -58,7 +58,7 @@ public class AdminCustomerController extends BaseController<Customer,Integer>{
     @RequestMapping(value="/print/{id}")
     public String printCustomer(ModelMap map,@PathVariable("id") Integer id,Boolean editing){
         Customer customer = customerService.findById(id);
-        if(customer!=null && editing){
+        if(editing!=null && customer!=null && editing){
             SysUser admin = sysUserService.getLoginAdmin();
             customer.setApprovalSysUserId(admin.getSysUserId());
             customer.setApprovalStatus(2);
