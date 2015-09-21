@@ -1,5 +1,8 @@
 package com.framework.module.customer.web.frontend;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.framework.common.base.BaseController;
 import com.framework.common.service.IService;
 import com.framework.module.customer.domain.Customer;
@@ -7,6 +10,7 @@ import com.framework.module.customer.service.ICustomerService;
 import com.framework.module.customer.vo.CustomerVo;
 import com.framework.module.user.domain.SysUser;
 import com.framework.module.user.service.ISysUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -60,11 +64,20 @@ public class CustomerController extends BaseController<Customer,Integer> {
      */
     @RequestMapping(value="register",method= RequestMethod.POST)
     @ResponseBody
-    public ModelMap register(CustomerVo customerVo,String[] customerVoList,MultipartFile mapPicPath,MultipartFile certPicPath,MultipartFile backCertPicPath){
+    public ModelMap register(CustomerVo customerVo,String customerVoList,MultipartFile mapPicPath,MultipartFile certPicPath,MultipartFile backCertPicPath){
         ModelMap map = new ModelMap();
         setFailure(map);
         try{
-            customerService.saveCustomerVo(customerVo,mapPicPath,certPicPath,backCertPicPath);
+            if(StringUtils.isNotBlank(customerVoList)){
+                JSONArray jsonArray = JSON.parseArray(customerVoList);
+                int size = jsonArray.size();
+                for(int i=0;i<size;i++){
+                    customerVo = JSON.parseObject(((JSONObject) jsonArray.get(i)).toJSONString(),CustomerVo.class);
+                    customerService.saveCustomerVo(customerVo, mapPicPath, certPicPath, backCertPicPath);
+                }
+            }else{
+                customerService.saveCustomerVo(customerVo, mapPicPath, certPicPath, backCertPicPath);
+            }
             setSuccess(map);
         }catch (Exception e){
             e.printStackTrace();
