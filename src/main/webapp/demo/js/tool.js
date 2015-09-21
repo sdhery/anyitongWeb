@@ -1,4 +1,4 @@
-;function UserInfo(){
+function UserInfo(){
 };
 
 

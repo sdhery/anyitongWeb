@@ -969,11 +969,13 @@
                     </div>
                     <ul id="files0" style="text-align:left;">
                     </ul>
-                    <button onclick="appendByGallery(0,'certPicPath')" class="btn mui-btn mui-btn-block">身份证正面上传</button>
+                    <button onclick="appendByGallery(0,'certPicPath')" class="btn mui-btn mui-btn-block">身份证正面上传
+                    </button>
 
                     <ul id="files1" style="text-align:left;">
                     </ul>
-                    <button onclick="appendByGallery(1,'backCertPicPath')" class="btn mui-btn mui-btn-block">身份证背面上传</button>
+                    <button onclick="appendByGallery(1,'backCertPicPath')" class="btn mui-btn mui-btn-block">身份证背面上传
+                    </button>
 
                     <div class="title">
                         地图截图
@@ -1442,7 +1444,7 @@
         li.innerText = n;
         $("#files" + uploadTag).html(li)
         //fe.appendChild(li);
-        files[uploadTag]={name: "" + uploadName + "", path: p};
+        files[uploadTag] = {name: "" + uploadName + "", path: p};
     }
     function upload() {
         mui.toast('开始上传');
@@ -1471,9 +1473,39 @@
         console.log(task)
         task.start();
     }
+    function uploadOfflineData() {
+        mui.toast('开始上传');
+        var wt = plus.nativeUI.showWaiting();
+        var Offline = plus.storage.getItem('Offline');
+        if (Offline) {
+            var params = JSON.parse(Offline);
+            $(params).each(function (index, obj) {
+                var task = plus.uploader.createUpload(server,
+                        {method: "POST"},
+                        function (t, status) { //上传完成plus.storage.setItem("uploader",t.responseText);
+                            if (status == 200) {
+                                wt.close();
+                                mui.toast("上传成功：");
+                            } else {
+                                mui.toast("上传失败：" + status);
+                                wt.close();
+                            }
+                        }
+                );
+                $(obj["customerVoList"]).each(function (key, item) {
+                      task.addData(item.name, item.value);
+                })
+                $(obj["files"]).each(function (i, item) {
+                    task.addFile(item.path, {key: item.name});
+                })
+                console.log(task)
+                task.start();
+            })
+        }
+    }
     function loginOut() {
-        window.location.href = "login.html"
         UserInfo.clear()
+        window.location.href = "login.html"
     }
     function customerFormSubmit() {
         upload()
@@ -1531,10 +1563,12 @@
         //alert("1"+Offline)
         if (Offline) {
             customerVoList["customerVoList"] = params
+            customerVoList["files"] = files
             Offline = JSON.stringify(new Array(customerVoList, JSON.parse(Offline)))
         } else {
             customerVoList["customerVoList"] = params;
-            Offline = JSON.stringify(customerVoList)
+            customerVoList["files"] = files
+            Offline = JSON.stringify(new Array(customerVoList))
         }
 
         //alert(Offline);
