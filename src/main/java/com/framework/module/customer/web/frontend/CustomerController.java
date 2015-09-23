@@ -86,4 +86,12 @@ public class CustomerController extends BaseController<Customer,Integer> {
         return map;
     }
 
+    @RequestMapping(value="checkCanBeConnected",method= RequestMethod.POST)
+    @ResponseBody
+    public ModelMap checkCanBeConnected(){
+        ModelMap map = new ModelMap();
+        setSuccess(map);
+        return map;
+    }
+
 }
