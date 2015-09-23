@@ -1460,6 +1460,7 @@
                     if (status == 200) {
                         wt.close();
                         mui.toast("上传成功：");
+                        window.location.href="setting.html"
                     } else {
                         mui.toast("上传失败：" + status);
                         wt.close();
@@ -1496,8 +1497,13 @@
                         {method: "POST"},
                         function (t, status) { //上传完成plus.storage.setItem("uploader",t.responseText);
                             if (status == 200) {
-                                wt.close();
-                                mui.toast("上传成功：");
+                                if(index==params.length-1){
+                                    wt.close();
+                                    mui.toast("上传成功：");
+                                    plus.storage.removeItem('Offline');
+                                    window.location.href="setting.html"
+                                }
+
                             } else {
                                 mui.toast("上传失败：" + status);
                                 wt.close();
@@ -1519,18 +1525,17 @@
         UserInfo.clear()
         window.location.href = "login.html"
     }
+    var checkCanBeConnected="http://192.168.1.104/customer/checkCanBeConnected";
     function customerFormSubmit() {
-        upload()
-        return
         try {
             plus.nativeUI.showWaiting();
         } catch (error) {
         }
-        var params = new Array()
+       /* var params = new Array()
         $.each($("form[name='customerVoForm']"), function (key, value) {
             params = params.concat($(this).serializeArray())
-        })
-        mui.ajax('http://192.168.1.104/customer/register', {
+        })*/
+        mui.ajax(checkCanBeConnected, {
             data: params,
             dataType: 'json',//服务器返回json格式数据
             type: 'post',//HTTP请求类型
@@ -1544,10 +1549,7 @@
                 if (!data.success) {
                     mui.toast(data.errMsg);
                 } else {
-                    alert("success")
-                    //UserInfo.username($loginId.val())
-                    //UserInfo.password($password.val())
-                    //window.location.href='setting.html'
+                    upload()
                 }
             },
             error: function (xhr, type, errorThrown) {
@@ -1558,8 +1560,9 @@
                 if (errorThrown == "Internal Server Error") {
                     mui.toast('Server Error');
                 } else {
+                    mui.toast('网络不佳开始保存离线数据');
                     saveOffline()//添加离线数据
-                    mui.toast('网络不佳');
+
                 }
 
             }
@@ -1585,6 +1588,8 @@
 
         //alert(Offline);
         plus.storage.setItem('Offline', Offline);
+        mui.toast('保存离线数据成功');
+        window.location.href="setting.html"
 
     }
     function checkReg1Form() {
@@ -1664,6 +1669,14 @@
         var reg1Form = document.getElementById("reg5Form")
         if ($.trim(reg1Form['customer.pagerId'].value) == "") {
             mui.toast('请填写呼叫器ID');
+            return
+        }
+        if(!files['certPicPath']){
+            mui.toast('请上传身份证正面照片');
+            return
+        }
+        if(!files['backCertPicPath']){
+            mui.toast('请上传身份证背面照片');
             return
         }
         $.each($("form[name='customerVoForm'] input"), function (key, value) {
