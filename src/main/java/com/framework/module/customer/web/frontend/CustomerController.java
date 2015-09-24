@@ -69,12 +69,12 @@ public class CustomerController extends BaseController<Customer,Integer> {
         setFailure(map);
         try{
             if(StringUtils.isNotBlank(customerVoList)){
-                JSONArray jsonArray = JSON.parseArray(customerVoList);
+                /*JSONArray jsonArray = JSON.parseArray(customerVoList);
                 int size = jsonArray.size();
                 for(int i=0;i<size;i++){
                     customerVo = JSON.parseObject(((JSONObject) jsonArray.get(i)).toJSONString(),CustomerVo.class);
                     customerService.saveCustomerVo(customerVo, mapPicPath, certPicPath, backCertPicPath);
-                }
+                }*/
             }else{
                 customerService.saveCustomerVo(customerVo, mapPicPath, certPicPath, backCertPicPath);
             }
