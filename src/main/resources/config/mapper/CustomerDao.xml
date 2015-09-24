@@ -89,7 +89,10 @@
         update
         <include refid="tableNameSql"/>
         <set>
-        <if test="title!=null and title!=''">realName=#{realName}</if>
+            <if test="title!=null and title!=''">realName=#{realName}</if>
+            <if test="certPicPath!=null and certPicPath!=''">certPicPath=#{certPicPath}</if>
+            <if test="backCertPicPath!=null and backCertPicPath!=''">backCertPicPath=#{backCertPicPath}</if>
+            <if test="mapPicPath!=null and mapPicPath!=''">mapPicPath=#{mapPicPath}</if>
         </set>
         where <include refid="conditionOnlyId"/>
     </update>
