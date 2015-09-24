@@ -43,9 +43,11 @@ public class CustomerService extends BaseService<Customer, Integer> implements I
         int customerId = customer.getCustomerId();
         //save mapPicPath
         customer.setMapPicPath(FileUtil.saveFile(customerId, mapPicPath, "_mapPic"));
-        customer.setMapPicPath(FileUtil.saveFile(customerId, certPicPath, "_certPic"));
+        customer.setCertPicPath(FileUtil.saveFile(customerId, certPicPath, "_certPic"));
         customer.setBackCertPicPath(FileUtil.saveFile(customerId, backCertPicPath, "_backCertPic"));
-        /*for (Contacts contacts : customerVo.getContactsList()) {
+
+        update(customer);
+        for (Contacts contacts : customerVo.getContactsList()) {
             contacts.setCustomerId(customerId);
             contactsService.save(contacts);
         }
@@ -70,7 +72,8 @@ public class CustomerService extends BaseService<Customer, Integer> implements I
                 healthStatus.setStatusDes(statusDesBuffer.toString());
             }
             healthStatusService.save(healthStatus);
-        }*/
+        }
+
     }
 
     public CustomerVo getCustomerVoByCustomerId(Integer customerId) {
