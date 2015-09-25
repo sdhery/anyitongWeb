@@ -73,6 +73,18 @@ public class AdminCustomerController extends BaseController<Customer,Integer>{
         return getPrefix()+"map";
     }
 
+    @RequestMapping(value="/cert/{id}")
+    public String cert(ModelMap map,@PathVariable("id") Integer id){
+        map.put("item", customerService.findById(id));
+        return getPrefix()+"cert";
+    }
+
+    @RequestMapping(value="/backCert/{id}")
+    public String backCert(ModelMap map,@PathVariable("id") Integer id){
+        map.put("item", customerService.findById(id));
+        return getPrefix()+"backCert";
+    }
+
     @RequestMapping(value="/approval")
     @ResponseBody
     public ModelMap approval(Customer customer){
