@@ -24,6 +24,8 @@
         <t:dgCol title="最后修改时间" sortable="false" field="lastModifiedTime"></t:dgCol>
         <t:dgToolBar title="打印" icon="icon-print"  funname="top.printUrl" url="/admin/customer/print" idFiledName="customerId"></t:dgToolBar>
         <t:dgToolBar title="查看定位" icon="icon-search"  funname="top.map" url="/admin/customer/map" idFiledName="customerId"></t:dgToolBar>
+        <t:dgToolBar title="查看身份证正面" icon="icon-search"  funname="top.map" url="/admin/customer/cert" idFiledName="customerId"></t:dgToolBar>
+        <t:dgToolBar title="查看身份证背面" icon="icon-search"  funname="top.map" url="/admin/customer/backCert" idFiledName="customerId"></t:dgToolBar>
         <t:dgToolBar title="编辑" icon="icon-redo"  funname="top.approval" url="/admin/customer/print" idFiledName="customerId" width="800" height="500"></t:dgToolBar>
 </t:datagrid>
 <script>
