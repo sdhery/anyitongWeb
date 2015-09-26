@@ -17,19 +17,24 @@
             return false;
         }, true);
         mui.plusReady(function () {
-            plus.storage.removeItem('Offline');
+            setMap()
+            //plus.storage.removeItem('Offline');
             plus.nativeUI.closeWaiting();
             $("#userName").html(UserInfo.username())
             $("#realName").html(UserInfo.realName())
             $("#sysUserId").html(UserInfo.sysUserId())
-            plus.geolocation.getCurrentPosition(geoInf, function (e) {
-                alert("获取百度定位位置信息失败：" + e.message);
-            }, {provider: 'baidu'});
+
         });
         function geoInf(position) {
             var codns = position.coords;//获取地理坐标信息；
+            console.log(codns.longitude+"--"+codns.latitude)
             $("#mapLongitude").val(codns.longitude)
             $("#mapLatitude").val(codns.latitude)
+        }
+        function setMap(){
+            plus.geolocation.getCurrentPosition(geoInf, function (e) {
+                alert("获取百度定位位置信息失败：" + e.message);
+            }, {provider: 'baidu'});
         }
     </script>
     <style>
@@ -37,7 +42,6 @@
         body {
             background-color: #efeff4;
         }
-
         .mui-views,
         .mui-view,
         .mui-pages,
@@ -52,32 +56,26 @@
             height: 100%;
             background-color: #efeff4;
         }
-
         .mui-pages {
             top: 46px;
             height: auto;
         }
-
         .mui-scroll-wrapper,
         .mui-scroll {
             background-color: #efeff4;
         }
-
         .mui-page.mui-transitioning {
             -webkit-transition: -webkit-transform 300ms ease;
             transition: transform 300ms ease;
         }
-
         .mui-page-left {
             -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
         }
-
         .mui-ios .mui-page-left {
             -webkit-transform: translate3d(-20%, 0, 0);
             transform: translate3d(-20%, 0, 0);
         }
-
         .mui-navbar {
             position: fixed;
             right: 0;
@@ -86,36 +84,29 @@
             height: 44px;
             background-color: #f7f7f8;
         }
-
         .mui-navbar .mui-bar {
             position: absolute;
             background: transparent;
             text-align: center;
         }
-
         .mui-android .mui-navbar-inner.mui-navbar-left {
             opacity: 0;
         }
-
         .mui-ios .mui-navbar-left .mui-left,
         .mui-ios .mui-navbar-left .mui-center,
         .mui-ios .mui-navbar-left .mui-right {
             opacity: 0;
         }
-
         .mui-navbar .mui-btn-nav {
             -webkit-transition: none;
             transition: none;
             -webkit-transition-duration: .0s;
             transition-duration: .0s;
         }
-
         .mui-navbar .mui-bar .mui-title {
             display: inline-block;
-            position: static;
             width: auto;
         }
-
         .mui-page-shadow {
             position: absolute;
             right: 100%;
@@ -125,60 +116,72 @@
             z-index: -1;
             content: '';
         }
-
         .mui-page-shadow {
             background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
             background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
         }
-
         .mui-navbar-inner.mui-transitioning,
         .mui-navbar-inner .mui-transitioning {
             -webkit-transition: opacity 300ms ease, -webkit-transform 300ms ease;
             transition: opacity 300ms ease, transform 300ms ease;
         }
-
         .mui-page {
             display: none;
         }
-
         .mui-pages .mui-page {
             display: block;
         }
-
         .mui-page .mui-table-view:first-child {
             margin-top: 15px;
         }
-
         .mui-page .mui-table-view:last-child {
             margin-bottom: 30px;
         }
-
         .mui-table-view {
             margin-top: 20px;
-        }
-
-        .mui-table-view:after {
-            height: 0;
         }
 
         .mui-table-view span.mui-pull-right {
             color: #999;
         }
-
         .mui-table-view-divider {
             background-color: #efeff4;
             font-size: 14px;
         }
-
         .mui-table-view-divider:before,
         .mui-table-view-divider:after {
             height: 0;
         }
-
-        .title {
-            margin: 20px 15px 7px;
-            color: #6d6d72;
-            font-size: 15px;
+        .head {
+            height: 40px;
+        }
+        #head {
+            line-height: 40px;
+        }
+        .head-img {
+            width: 40px;
+            height: 40px;
+        }
+        #head-img1 {
+            position: absolute;
+            bottom: 10px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+        }
+        .update {
+            font-style: normal;
+            color: #999999;
+            margin-right: -25px;
+            font-size: 15px
+        }
+        .mui-fullscreen {
+            position: fixed;
+            z-index: 20;
+            background-color: #000;
+        }
+        .mui-ios .mui-navbar .mui-bar .mui-title {
+            position: static;
         }
     </style>
 </head>
@@ -1525,7 +1528,7 @@
         UserInfo.clear()
         window.location.href = "login.html"
     }
-    var checkCanBeConnected="http://192.168.1.104/customer/checkCanBeConnected";
+    var checkCanBeConnected="http://192.168.1.2/customer/checkCanBeConnected";
     function customerFormSubmit() {
         try {
             plus.nativeUI.showWaiting();
@@ -1535,8 +1538,8 @@
         $.each($("form[name='customerVoForm']"), function (key, value) {
             params = params.concat($(this).serializeArray())
         })*/
+        setMap()
         mui.ajax(checkCanBeConnected, {
-            data: params,
             dataType: 'json',//服务器返回json格式数据
             type: 'post',//HTTP请求类型
             timeout: 3000,//超时时间设置为10秒；
@@ -1671,12 +1674,16 @@
             mui.toast('请填写呼叫器ID');
             return
         }
-        if(!files['certPicPath']){
+        if(!files[0]){
             mui.toast('请上传身份证正面照片');
             return
         }
-        if(!files['backCertPicPath']){
+        if(!files[1]){
             mui.toast('请上传身份证背面照片');
+            return
+        }
+        if(!files[2]){
+            mui.toast('请上传地图截图');
             return
         }
         $.each($("form[name='customerVoForm'] input"), function (key, value) {
