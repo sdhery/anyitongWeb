@@ -8,6 +8,6 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 </head>
 <body>
-<img src="${item.backCertPicPath}"/>
+<img src="${frontPath}/upload/${item.backCertPicPath}"/>
 </body>
 </html>
