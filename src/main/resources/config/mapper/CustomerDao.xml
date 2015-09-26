@@ -89,9 +89,8 @@
         update
         <include refid="tableNameSql"/>
         <set>
-            <if test="title!=null and title!=''">realName=#{realName}</if>
-            <if test="certPicPath!=null and certPicPath!=''">certPicPath=#{certPicPath}</if>
-            <if test="backCertPicPath!=null and backCertPicPath!=''">backCertPicPath=#{backCertPicPath}</if>
+            <if test="certPicPath!=null and certPicPath!=''">certPicPath=#{certPicPath},</if>
+            <if test="backCertPicPath!=null and backCertPicPath!=''">backCertPicPath=#{backCertPicPath},</if>
             <if test="mapPicPath!=null and mapPicPath!=''">mapPicPath=#{mapPicPath}</if>
         </set>
         where <include refid="conditionOnlyId"/>
@@ -148,7 +147,7 @@
     </resultMap>
 
     <select id="findCustomerVoList" parameterType="com.framework.module.customer.domain.Customer" resultMap="CustomerVoListResultMap">
-        SELECT t.*,t2.realName AS editRealName FROM prd_customer t INNER JOIN sys_user t2 ON t.approvalSysUserId= t2.SYS_USER_ID
+        SELECT t.*,t2.realName AS editRealName FROM prd_customer t LEFT JOIN sys_user t2 ON t.approvalSysUserId= t2.SYS_USER_ID
         <include refid="varSql"/>
         ORDER BY createTime DESC,lastModifiedTime DESC
     </select>
