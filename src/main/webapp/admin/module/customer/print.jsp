@@ -5,13 +5,17 @@
 <HTML>
 <title>登记打印</title>
 <link href="${frontPath}/resources/bootstrap3/css/bootstrap.min.css" rel="stylesheet"/>
-
+<style>
+    body{
+        font-size:12px;
+    }
+</style>
 </head>
 <body>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
         <td align="center">
-            <h4>安 颐 通 呼 援 服 务 用 户 登 记 表</h4>
+            <h6>安 颐 通 呼 援 服 务 用 户 登 记 表</h6>
         </td>
     </tr>
 </table>
@@ -90,36 +94,6 @@
         <td colspan="2"></td>
     </tr>
     </c:forEach>
-	<tr>
-        <td>联络人4</td>
-        <td>${contacts.realName}</td>
-        <td>${contacts.sex eq 1 ? '男' : '女'}</td>
-        <td>${contacts.bind}</td>
-        <td>${contacts.phone}</td>
-        <td>${contacts.mobilePhone}</td>
-        <td>${contacts.address}</td>
-        <td colspan="2"></td>
-    </tr>
-	<tr>
-        <td>联络人4</td>
-        <td>${contacts.realName}</td>
-        <td>${contacts.sex eq 1 ? '男' : '女'}</td>
-        <td>${contacts.bind}</td>
-        <td>${contacts.phone}</td>
-        <td>${contacts.mobilePhone}</td>
-        <td>${contacts.address}</td>
-        <td colspan="2"></td>
-    </tr>
-	<tr>
-        <td>联络人5</td>
-        <td>${contacts.realName}</td>
-        <td>${contacts.sex eq 1 ? '男' : '女'}</td>
-        <td>${contacts.bind}</td>
-        <td>${contacts.phone}</td>
-        <td>${contacts.mobilePhone}</td>
-        <td>${contacts.address}</td>
-        <td colspan="2"></td>
-    </tr>
     <tr>
         <td colspan="9"></td>
     </tr>
@@ -147,7 +121,7 @@
         <td>身体状况</td>
         <td colspan="5">${sdk:getHealthStatusByType(item.healthStatusList,0).statusDes}</td>
         <td>血型</td>
-        <td></td>
+        <td>${sdk:getHealthStatusByType(item.healthStatusList,1).statusDes}</td>
     </tr>
     <tr>
         <td rowspan="2">现有疾病</td>
@@ -164,11 +138,11 @@
     </tr>
     <tr>
         <td>个人病史</td>
-        <td colspan="8"></td>
+        <td colspan="8">${sdk:getHealthStatusByType(item.healthStatusList,3).statusDes}</td>
     </tr>
     <tr>
         <td>病况摘要</td>
-        <td colspan="8"></td>
+        <td colspan="8">${sdk:getHealthStatusByType(item.healthStatusList,4).statusDes}</td>
     </tr>
     <tr>
         <td>常用药</td>
@@ -193,17 +167,17 @@
     </tr>
     <tr>
         <td>挂钩医院</td>
-        <td colspan="2"></td>
+        <td colspan="2">${sdk:getHealthStatusByType(item.healthStatusList,8).statusDes}</td>
         <td>诊疗卡号/病历编号</td>
-        <td colspan="2"></td>
+        <td colspan="2">${sdk:getHealthStatusByType(item.healthStatusList,9).statusDes}</td>
         <td>付费方式</td>
-        <td colspan="2"></td>
+        <td colspan="2">${sdk:getHealthStatusByType(item.healthStatusList,10).statusDes}</td>
     </tr>
 	<tr>
         <td>设备安装</td>
         <td colspan="2"></td>
         <td>设备ID</td>
-        <td colspan="2"></td>
+        <td colspan="2">${item.customer.pagerId}</td>
         <td>附加设备</td>
         <td colspan="2"></td>
     </tr>
