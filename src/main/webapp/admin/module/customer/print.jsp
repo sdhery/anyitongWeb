@@ -123,18 +123,19 @@
         <td>血型</td>
         <td>${sdk:getHealthStatusByType(item.healthStatusList,1).statusDes}</td>
     </tr>
+    <c:set value="${fn:split(sdk:getHealthStatusByType(item.healthStatusList,2).statusDes,';')}" var="healthStatusList2"/>
     <tr>
         <td rowspan="2">现有疾病</td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
+        <td colspan="2">${healthStatusList2[0]}</td>
+        <td colspan="2">${healthStatusList2[1]}</td>
+        <td colspan="2">${healthStatusList2[2]}</td>
+        <td colspan="2">${healthStatusList2[3]}</td>
     </tr>
     <tr>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
+        <td colspan="2">${healthStatusList2[4]}</td>
+        <td colspan="2">${healthStatusList2[5]}</td>
+        <td colspan="2">${healthStatusList2[6]}</td>
+        <td colspan="2">${healthStatusList2[7]}</td>
     </tr>
     <tr>
         <td>个人病史</td>
@@ -144,26 +145,29 @@
         <td>病况摘要</td>
         <td colspan="8">${sdk:getHealthStatusByType(item.healthStatusList,4).statusDes}</td>
     </tr>
+    <c:set value="${fn:split(sdk:getHealthStatusByType(item.healthStatusList,5).statusDes,';')}" var="healthStatusList5"/>
     <tr>
         <td>常用药</td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
+        <td colspan="2">${healthStatusList5[0]}</td>
+        <td colspan="2">${healthStatusList5[1]}</td>
+        <td colspan="2">${healthStatusList5[2]}</td>
+        <td colspan="2">${healthStatusList5[3]}</td>
     </tr>
+    <c:set value="${fn:split(sdk:getHealthStatusByType(item.healthStatusList,6).statusDes,';')}" var="healthStatusList6"/>
     <tr>
         <td>禁忌药</td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
+        <td colspan="2">${healthStatusList6[0]}</td>
+        <td colspan="2">${healthStatusList6[1]}</td>
+        <td colspan="2">${healthStatusList6[2]}</td>
+        <td colspan="2">${healthStatusList6[3]}</td>
     </tr>
+    <c:set value="${fn:split(sdk:getHealthStatusByType(item.healthStatusList,7).statusDes,';')}" var="healthStatusList7"/>
     <tr>
         <td>过敏史</td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
-        <td colspan="2"></td>
+        <td colspan="2">${healthStatusList7[0]}</td>
+        <td colspan="2">${healthStatusList7[1]}</td>
+        <td colspan="2">${healthStatusList7[2]}</td>
+        <td colspan="2">${healthStatusList7[3]}</td>
     </tr>
     <tr>
         <td>挂钩医院</td>
