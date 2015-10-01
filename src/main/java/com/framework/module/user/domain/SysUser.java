@@ -30,6 +30,7 @@ public class SysUser extends BaseDomain implements UserDetails {
     private Date createTime;
     private Date lastLoginTime;
     private String jobNumber;
+    private String mobilePhone;
 
     public Integer getSysUserId() {
         return sysUserId;
@@ -133,5 +134,13 @@ public class SysUser extends BaseDomain implements UserDetails {
 
     public void setJobNumber(String jobNumber) {
         this.jobNumber = jobNumber;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 }

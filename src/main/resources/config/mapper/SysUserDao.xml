@@ -124,4 +124,8 @@
         </set>
         where <include refid="conditionOnlyId"/>
     </update>
+
+    <select id="countByLoginId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM <include refid="tableNameSql"/> WHERE LOGIN_ID=#{loginId}
+    </select>
 </mapper>

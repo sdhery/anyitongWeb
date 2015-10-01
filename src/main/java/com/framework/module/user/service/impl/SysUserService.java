@@ -78,4 +78,8 @@ public class SysUserService extends BaseService<SysUser, Integer> implements ISy
             return (SysUser) principal;
         }
     }
+
+    public Integer countByLoginId(String loginId) {
+        return (Integer) findByObject("countByLoginId",loginId);
+    }
 }

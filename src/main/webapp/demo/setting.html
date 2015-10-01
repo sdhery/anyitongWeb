@@ -1513,7 +1513,7 @@
                             if (status == 200) {
                                 if(index==params.length-1){
                                     wt.close();
-                                    mui.toast("上传成功：");
+                                    mui.toast("上传成功");
                                     plus.storage.removeItem('Offline');
                                     window.location.href="setting.html"
                                 }
@@ -1561,7 +1561,8 @@
                 } catch (error) {
                 }
                 if (!data.success) {
-                    mui.toast(data.errMsg);
+                    mui.toast('网络不佳开始保存离线数据');
+                    saveOffline()//添加离线数据
                 } else {
                     upload()
                 }

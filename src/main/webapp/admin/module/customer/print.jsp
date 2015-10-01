@@ -25,7 +25,7 @@
         <td>姓名</td>
         <td>${item.customer.realName}</td>
         <td>性别</td>
-        <td>${item.customer.sex eq 1 ? '男' : '女'}</td>
+        <td><c:choose><c:when test="${item.customer.sex eq 1}">男</c:when><c:when test="${item.customer.sex eq 2}">女</c:when></c:choose></td>
         <td>用户编号</td>
         <td></td>
         <td>街道/镇</td>
@@ -86,7 +86,7 @@
     <tr>
         <td>联络人${s.count}</td>
         <td>${contacts.realName}</td>
-        <td>${contacts.sex eq 1 ? '男' : '女'}</td>
+        <td><c:choose><c:when test="${contacts.sex eq 1}">男</c:when><c:when test="${contacts.sex eq 2}">女</c:when></c:choose></td>
         <td>${contacts.bind}</td>
         <td>${contacts.phone}</td>
         <td>${contacts.mobilePhone}</td>

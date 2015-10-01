@@ -91,6 +91,7 @@ public class CustomerController extends BaseController<Customer,Integer> {
     public ModelMap checkCanBeConnected(){
         ModelMap map = new ModelMap();
         setSuccess(map);
+        setFailure(map);
         return map;
     }
 

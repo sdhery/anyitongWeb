@@ -20,7 +20,7 @@
         <tr>
             <td>用户名:</td>
             <td>
-                <input class="easyui-textbox" type="text" name="loginId" value="${item.loginId}" data-options="required:true" ${empty item.loginId ? '' : 'disabled'}/>
+                <input class="easyui-validatebox textbox" type="text" name="loginId" value="${item.loginId}" data-options="required:true,validType:['checkLoginId','length[4,10]']" ${empty item.loginId ? '' : 'disabled'}/>
             </td>
         </tr>
         <tr>
@@ -40,6 +40,28 @@
     </table>
 </form>
 <script>
+    $.extend($.fn.validatebox.defaults.rules, {
+        checkLoginId: {
+            validator: function(value){
+                var flag;
+                $.ajax({
+                    type: 'POST',
+                    url: '<c:url value="/admin/admin/countByLoginId"/>',
+                    data:'loginId='+value,
+                    async:false,
+                    success: function(data) {
+                        if(data.success==true) {
+                            flag = true;
+                        }else{
+                            flag =  false;
+                        }
+                    }
+                });
+                return flag;
+            },
+            message: '您输入的用户名已存在，请更换。'
+        }
+    });
     $("#formObj").form({
         url: '${frontPath}/admin/admin/saveAdmin',
         onSubmit: function () {

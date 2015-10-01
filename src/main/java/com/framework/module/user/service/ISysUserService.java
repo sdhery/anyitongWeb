@@ -30,4 +30,6 @@ public interface ISysUserService extends IService<SysUser,Integer> {
 
     public SysUser getLoginAdmin();
 
+    public Integer countByLoginId(String loginId);
+
 }

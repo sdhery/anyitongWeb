@@ -97,4 +97,18 @@ public class AdminManageController extends BaseController<SysUser,Integer> {
         }
         return map;
     }
+
+    @RequestMapping(value = "countByLoginId",method = RequestMethod.POST)
+    @ResponseBody
+    public ModelMap countByLoginId(String loginId){
+        ModelMap map = new ModelMap();
+        if(sysUserService.countByLoginId(loginId)>0){
+            setFailure(map);
+        }else{
+            setSuccess(map);
+        }
+        return map;
+    }
+
+
 }

@@ -39,6 +39,7 @@ function openIframeDialog(title, url, gridId, width, height, buttons) {
         title: title,
         width: width ? width : "auto",
         height: height ? height : "auto",
+        maximizable:true,
         content: "<iframe scrolling=\"auto\" frameborder=\"0\" style=\"width:100%;height:99.8%;\" name=\"dialogIFrame\" id=\"dialogIFrame\" src='" + url + "'></iframe>",
         modal: true,
         onBeforeClose:showApprovalConfirm,
