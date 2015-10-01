@@ -144,10 +144,11 @@
         <result column="approvalDes" property="approvalDes"/>
         <result column="approvalSysUserId" property="approvalSysUserId"/>
         <result column="editRealName" property="editRealName"/>
+        <result column="businessName" property="businessName"/>
     </resultMap>
 
     <select id="findCustomerVoList" parameterType="com.framework.module.customer.domain.Customer" resultMap="CustomerVoListResultMap">
-        SELECT t.*,t2.realName AS editRealName FROM prd_customer t LEFT JOIN sys_user t2 ON t.approvalSysUserId= t2.SYS_USER_ID
+        SELECT t.*,t2.realName AS editRealName,t3.realName AS businessName FROM prd_customer t LEFT JOIN sys_user t2 ON t.approvalSysUserId= t2.SYS_USER_ID LEFT JOIN sys_user t3 ON t.sysUserId = t3.SYS_USER_ID
         <include refid="varSql"/>
         ORDER BY createTime DESC,lastModifiedTime DESC
     </select>

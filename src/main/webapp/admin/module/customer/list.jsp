@@ -18,6 +18,7 @@
         <t:dgCol title="呼叫器ID" sortable="false" field="pagerId"></t:dgCol>
 		<t:dgCol title="编辑状态" sortable="false" field="approvalStatus" replace="未编辑_1,正在编辑_2,编辑完成_3,审批不通过_4" query="true" style="color:red"></t:dgCol>
         <t:dgCol title="编辑人" sortable="false" field="editRealName" style="color:blue"></t:dgCol>
+        <t:dgCol title="业务员" sortable="false" field="businessName"></t:dgCol>
         <t:dgCol title="地图经度" sortable="false" field="mapLongitude"></t:dgCol>
         <t:dgCol title="地图纬度" sortable="false" field="mapLatitude"></t:dgCol>
         <t:dgCol title="创建时间" sortable="false" field="createTime"></t:dgCol>
