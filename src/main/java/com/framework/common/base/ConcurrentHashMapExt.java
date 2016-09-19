@@ -4,14 +4,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * ÏîÄ¿Ãû³Æ£ºanyitongWeb
- * ÀàÃû³Æ£º
- * ÀàÃèÊö£º
- * ´´½¨ÈË£ºAdministrator
- * ´´½¨Ê±¼ä£º2015/7/11 12:23
- * ĞŞ¸ÄÈË£ºAdministrator
- * ĞŞ¸ÄÊ±¼ä£º2015/7/11 12:23
- * ĞŞ¸Ä±¸×¢£º
+ * é¡¹ç›®åç§°ï¼šanyitongWeb
+ * ç±»åç§°ï¼š
+ * ç±»æè¿°ï¼š
+ * åˆ›å»ºäººï¼šAdministrator
+ * åˆ›å»ºæ—¶é—´ï¼š2015/7/11 12:23
+ * ä¿®æ”¹äººï¼šAdministrator
+ * ä¿®æ”¹æ—¶é—´ï¼š2015/7/11 12:23
+ * ä¿®æ”¹å¤‡æ³¨ï¼š
  */
 public class ConcurrentHashMapExt<K, V> extends ConcurrentHashMap<K, V> {
     public ConcurrentHashMapExt() {
